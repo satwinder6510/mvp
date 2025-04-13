@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoTrend Alpha | Proprietary Trading Algorithm</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- React and ReactDOM -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <!-- Recharts and its dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.7.2/Recharts.min.js"></script>
+    <!-- Babel for JSX transpilation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.22.13/babel.min.js"></script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.4);
+        }
+        .testimonial-card {
+            backdrop-filter: blur(10px);
+        }
+        .stat-card {
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+    </style>
+</head>
+<body class="gradient-bg text-gray-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="px-6 py-4 bg-gray-900 bg-opacity-80 backdrop-filter backdrop-blur-md border-b border-indigo-900">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-chart-line text-indigo-500 text-2xl"></i>
+                <span class="text-xl font-bold">CryptoTrend Alpha</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#how-it-works" class="hover:text-indigo-400 transition">How It Works</a>
+                <a href="#performance" class="hover:text-indigo-400 transition">Performance</a>
+                <a href="#testimonials" class="hover:text-indigo-400 transition">Testimonials</a>
+                <a href="#pricing" class="hover:text-indigo-400 transition">Pricing</a>
+                <a href="#faq" class="hover:text-indigo-400 transition">FAQ</a>
+            </div>
+            <div class="flex space-x-4">
+                <select class="bg-gray-800 border border-indigo-900 rounded px-2 py-1 text-sm">
+                    <option value="en">English</option>
+                    <option value="hi">हिन्दी</option>
+                    <option value="ta">தமிழ்</option>
+                    <option value="te">తెలుగు</option>
+                </select>
+                <a href="#signup" class="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg shadow-md transition">
+                    Sign Up
+                </a>
+            </div>
+            <button class="md:hidden text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-20 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-12 md:mb-0">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                    Automated <span class="gradient-text">Crypto Futures</span> Trading Algorithm
+                </h1>
+                <p class="text-xl text-gray-300 mb-8">
+                    Our proprietary trend-following strategy delivers consistent 40% annualized returns in the volatile crypto markets.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#signup" class="bg-indigo-600 hover:bg-indigo-700 px-6 py-3 rounded-lg shadow-md text-center font-medium transition">
+                        Start Trading Now
+                    </a>
+                    <a href="#performance" class="border border-indigo-600 hover:bg-indigo-900 px-6 py-3 rounded-lg text-center font-medium transition">
+                        View Performance
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2">
+                <div class="relative">
+                    <div class="absolute inset-0 bg-indigo-500 bg-opacity-20 rounded-lg filter blur-xl"></div>
+                    <img src="https://placehold.co/800x600/1e293b/e2e8f0.png?text=Trading+Dashboard" alt="Trading dashboard" class="relative rounded-lg shadow-2xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Stats -->
+    <section class="py-12 px-6 bg-gray-900">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="stat-card flex flex-col items-center p-6 rounded-lg bg-gray-800 bg-opacity-60">
+                    <span class="text-4xl font-bold text-indigo-400">40%</span>
+                    <span class="text-sm text-gray-400">Annual Return</span>
+                </div>
+                <div class="stat-card flex flex-col items-center p-6 rounded-lg bg-gray-800 bg-opacity-60">
+                    <span class="text-4xl font-bold text-green-400">74%</span>
+                    <span class="text-sm text-gray-400">Win Rate</span>
+                </div>
+                <div class="stat-card flex flex-col items-center p-6 rounded-lg bg-gray-800 bg-opacity-60">
+                    <span class="text-4xl font-bold text-red-400">12%</span>
+                    <span class="text-sm text-gray-400">Max Drawdown</span>
+                </div>
+                <div class="stat-card flex flex-col items-center p-6 rounded-lg bg-gray-800 bg-opacity-60">
+                    <span class="text-4xl font-bold text-yellow-400">3.2</span>
+                    <span class="text-sm text-gray-400">Sharpe Ratio</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="py-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">How Our Algorithm Works</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Our proprietary trading algorithm analyzes market trends and executes trades automatically with precision timing.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="feature-card p-6 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900 transition duration-300">
+                    <div class="w-14 h-14 mb-6 flex items-center justify-center rounded-full bg-indigo-900 text-indigo-300">
+                        <i class="fas fa-chart-line text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Trend Identification</h3>
+                    <p class="text-gray-400">
+                        Our algorithm identifies emerging market trends across multiple timeframes using proprietary indicators.
+                    </p>
+                </div>
+                
+                <div class="feature-card p-6 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900 transition duration-300">
+                    <div class="w-14 h-14 mb-6 flex items-center justify-center rounded-full bg-indigo-900 text-indigo-300">
+                        <i class="fas fa-robot text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Automated Execution</h3>
+                    <p class="text-gray-400">
+                        Trades are executed automatically with precision timing, eliminating emotional decision-making.
+                    </p>
+                </div>
+                
+                <div class="feature-card p-6 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900 transition duration-300">
+                    <div class="w-14 h-14 mb-6 flex items-center justify-center rounded-full bg-indigo-900 text-indigo-300">
+                        <i class="fas fa-shield-alt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Risk Management</h3>
+                    <p class="text-gray-400">
+                        Advanced risk management protocols protect your capital during market volatility and downturns.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-16 flex justify-center">
+                <a href="#signup" class="flex items-center space-x-2 text-indigo-400 hover:text-indigo-300 transition">
+                    <span>Learn more about our technology</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Performance Section -->
+    <section id="performance" class="py-20 px-6 bg-gray-900">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Verified Performance</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Our algorithm has been backtested across multiple market cycles with consistent results.
+                </p>
+            </div>
+
+            <!-- This is where we'll render the React infographic component -->
+            <div id="backtest-infographic" class="bg-gray-800 p-8 rounded-xl border border-indigo-900 shadow-xl"></div>
+
+            <div class="grid md:grid-cols-3 gap-6 mt-12">
+                <div class="p-6 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900">
+                    <h3 class="text-xl font-semibold mb-3 text-green-400">Best Month</h3>
+                    <p class="text-3xl font-bold mb-1">+14.0%</p>
+                    <p class="text-gray-400">February 2024</p>
+                </div>
+                
+                <div class="p-6 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900">
+                    <h3 class="text-xl font-semibold mb-3 text-yellow-400">Average Monthly</h3>
+                    <p class="text-3xl font-bold mb-1">+3.3%</p>
+                    <p class="text-gray-400">Across all market conditions</p>
+                </div>
+                
+                <div class="p-6 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-400">Recovery Time</h3>
+                    <p class="text-3xl font-bold mb-1">2.4 Months</p>
+                    <p class="text-gray-400">Average time to new equity high</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-20 px-6 relative">
+        <div class="absolute inset-0 opacity-10">
+            <img src="https://placehold.co/1600x1000/1e293b/e2e8f0.png?text=Background" alt="Background pattern" class="w-full h-full object-cover">
+        </div>
+        <div class="max-w-7xl mx-auto relative">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">What Our Customers Say</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Join thousands of traders who have transformed their crypto trading journey.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="testimonial-card p-6 rounded-xl bg-gray-800 bg-opacity-40 border border-indigo-900 shadow-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="mb-6 text-gray-300">
+                        "I've tried many crypto trading systems, but CryptoTrend Alpha has consistently outperformed them all. The trend-following strategy works remarkably well in these volatile markets."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-indigo-600 flex items-center justify-center text-xl font-bold mr-4">
+                            RK
+                        </div>
+                        <div>
+                            <p class="font-medium">Rajesh Kumar</p>
+                            <p class="text-sm text-gray-400">Mumbai, Trading since 2021</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card p-6 rounded-xl bg-gray-800 bg-opacity-40 border border-indigo-900 shadow-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="mb-6 text-gray-300">
+                        "The transparency is what I appreciate most. I can verify the algorithm's performance, and the team is always available to answer my questions. My returns have been exactly as advertised."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-indigo-600 flex items-center justify-center text-xl font-bold mr-4">
+                            SA
+                        </div>
+                        <div>
+                            <p class="font-medium">Sneha Agarwal</p>
+                            <p class="text-sm text-gray-400">Bangalore, Trading since 2022</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card p-6 rounded-xl bg-gray-800 bg-opacity-40 border border-indigo-900 shadow-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="mb-6 text-gray-300">
+                        "As someone new to crypto trading, I was skeptical at first. The returns seemed too good to be true. Six months in, I'm seeing consistent profits even during market downturns."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-indigo-600 flex items-center justify-center text-xl font-bold mr-4">
+                            VP
+                        </div>
+                        <div>
+                            <p class="font-medium">Vikram Patel</p>
+                            <p class="text-sm text-gray-400">Delhi, Trading since 2023</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="py-20 px-6 bg-gray-900">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Transparent Pricing</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Simple and straightforward pricing with no hidden fees.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="p-8 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900 transition duration-300 hover:shadow-xl hover:shadow-indigo-900/20">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold mb-2">Basic</h3>
+                        <p class="text-gray-400">For new traders getting started</p>
+                    </div>
+                    <div class="mb-6">
+                        <p class="text-4xl font-bold">₹4,999</p>
+                        <p class="text-gray-400">per month</p>
+                    </div>
+                    <ul class="mb-8 space-y-3">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>Algorithm access</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>Bitcoin & Ethereum pairs</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>Daily trade signals</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>Basic support</span>
+                        </li>
+                    </ul>
+                    <a href="#signup" class="block w-full text-center bg-indigo-600 hover:bg-indigo-700 px-6 py-3 rounded-lg shadow-md font-medium transition">
+                        Get Started
+                    </a>
+                </div>
+                
+                <div class="p-8 rounded-xl bg-indigo-900 bg-opacity-40 border border-indigo-500 shadow-xl relative transition duration-300 hover:shadow-2xl hover:shadow-indigo-500/30 transform -translate-y-4">
+                    <div class="absolute -top-4 right-8 bg-indigo-500 px-3 py-1 rounded-full text-sm font-medium">
+                        Most Popular
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold mb-2">Pro</h3>
+                        <p class="text-gray-300">For serious traders</p>
+                    </div>
+                    <div class="mb-6">
+                        <p class="text-4xl font-bold">₹9,999</p>
+                        <p class="text-gray-300">per month</p>
+                    </div>
+                    <ul class="mb-8 space-y-3">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>Everything in Basic</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>All major crypto pairs</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>Automated execution</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>Risk management tools</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>Priority support</span>
+                        </li>
+                    </ul>
+                    <a href="#signup" class="block w-full text-center bg-indigo-500 hover:bg-indigo-600 px-6 py-3 rounded-lg shadow-md font-medium transition">
+                        Get Started
+                    </a>
+                </div>
+                
+                <div class="p-8 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900 transition duration-300 hover:shadow-xl hover:shadow-indigo-900/20">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold mb-2">Enterprise</h3>
+                        <p class="text-gray-400">For professional traders</p>
+                    </div>
+                    <div class="mb-6">
+                        <p class="text-4xl font-bold">₹24,999</p>
+                        <p class="text-gray-400">per month</p>
+                    </div>
+                    <ul class="mb-8 space-y-3">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>Everything in Pro</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>Custom risk parameters</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>API access</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>Dedicated account manager</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>Strategy customization</span>
+                        </li>
+                    </ul>
+                    <a href="#signup" class="block w-full text-center bg-indigo-600 hover:bg-indigo-700 px-6 py-3 rounded-lg shadow-md font-medium transition">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Get answers to the most common questions about our algorithm.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-6 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900">
+                    <h3 class="text-xl font-semibold mb-3">How does the algorithm work?</h3>
+                    <p class="text-gray-300">
+                        Our proprietary algorithm analyzes market trends across multiple timeframes using advanced technical indicators. It identifies high-probability trade setups and executes trades automatically on your behalf.
+                    </p>
+                </div>
+                
+                <div class="p-6 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900">
+                    <h3 class="text-xl font-semibold mb-3">What exchanges are supported?</h3>
+                    <p class="text-gray-300">
+                        We currently support Binance, WazirX, CoinDCX, and Zebpay. We're constantly working to add more exchanges based on user demand.
+                    </p>
+                </div>
+                
+                <div class="p-6 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900">
+                    <h3 class="text-xl font-semibold mb-3">How much capital do I need to start?</h3>
+                    <p class="text-gray-300">
+                        We recommend starting with at least ₹1,00,000 to achieve optimal results, but you can begin with as little as ₹25,000. The algorithm scales effectively with larger capital amounts.
+                    </p>
+                </div>
+                
+                <div class="p-6 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900">
+                    <h3 class="text-xl font-semibold mb-3">Is this legal in India?</h3>
+                    <p class="text-gray-300">
+                        Yes, crypto trading is legal in India. Our algorithm simply automates your trading strategy and executes trades on your behalf. You maintain complete control over your accounts and funds.
+                    </p>
+                </div>
+                
+                <div class="p-6 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900">
+                    <h3 class="text-xl font-semibold mb-3">What's the minimum subscription period?</h3>
+                    <p class="text-gray-300">
+                        Our minimum subscription period is 3 months. We offer discounts for 6-month and annual subscriptions. You can cancel anytime after the minimum period.
+                    </p>
+                </div>
+                
+                <div class="p-6 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900">
+                    <h3 class="text-xl font-semibold mb-3">Do you offer a refund policy?</h3>
+                    <p class="text-gray-300">
+                        Yes, we offer a 14-day money-back guarantee if you're not satisfied with the service. Terms and conditions apply.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sign Up Section -->
+    <section id="signup" class="py-20 px-6 bg-indigo-900 bg-opacity-40">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6">Start Trading With Confidence</h2>
+                    <p class="text-xl text-gray-300 mb-8">
+                        Join thousands of Indian traders who are already benefiting from our algorithmic trading strategy.
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-400 mt-1 mr-3"></i>
+                            <span>No prior trading experience required</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-400 mt-1 mr-3"></i>
+                            <span>Quick setup process (under 15 minutes)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-400 mt-1 mr-3"></i>
+                            <span>24/7 customer support</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-400 mt-1 mr-3"></i>
+                            <span>Secure encryption for all your data</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-800 p-8 rounded-xl border border-indigo-900 shadow-xl">
+                    <h3 class="text-2xl font-semibold mb-6">Create Your Account</h3>
+                    <form>
+                        <div class="mb-4">
+                            <label class="block text-gray-300 mb-2" for="name">Full Name</label>
+                            <input type="text" id="name" class="w-full bg-gray-900 border border-indigo-800 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-gray-300 mb-2" for="email">Email Address</label>
+                            <input type="email" id="email" class="w-full bg-gray-900 border border-indigo-800 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-gray-300 mb-2" for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="w-full bg-gray-900 border border-indigo-800 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block text-gray-300 mb-2" for="investment">Investment Range</label>
+                            <select id="investment" class="w-full bg-gray-900 border border-indigo-800 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                <option value="">Select an amount</option>
+                                <option value="25k-50k">₹25,000 - ₹50,000</option>
+                                <option value="50k-1L">₹50,000 - ₹1,00,000</option>
+                                <option value="1L-5L">₹1,00,000 - ₹5,00,000</option>
+                                <option value="5L+">₹5,00,000+</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 px-6 py-3 rounded-lg shadow-md font-medium transition">
+                            Get Started
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 bg-gray-900 border-t border-indigo-900">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-chart-line text-indigo-500 text-2xl"></i>
+                        <span class="text-xl font-bold">CryptoTrend Alpha</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Leveraging proprietary algorithms to deliver consistent returns in the crypto markets.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-medium text-lg mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-indigo-400 transition">Home</a></li>
+                        <li><a href="#how-it-works" class="text-gray-400 hover:text-indigo-400 transition">How It Works</a></li>
+                        <li><a href="#performance" class="text-gray-400 hover:text-indigo-400 transition">Performance</a></li>
+                        <li><a href="#pricing" class="text-gray-400 hover:text-indigo-400 transition">Pricing</a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-indigo-400 transition">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-medium text-lg mb-4">Legal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-indigo-400 transition">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-indigo-400 transition">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-indigo-400 transition">Risk Disclosure</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-indigo-400 transition">Refund Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-medium text-lg mb-4">Contact</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-envelope text-indigo-400"></i>
+                            <span class="text-gray-400">support@cryptotrendalpha.com</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-phone text-indigo-400"></i>
+                            <span class="text-gray-400">+91 9876543210</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-map-marker-alt text-indigo-400"></i>
+                            <span class="text-gray-400">Mumbai, India</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+                <p>© 2025 CryptoTrend Alpha. All rights reserved.</p>
+                <p class="mt-2">Trading cryptocurrencies involves substantial risk of loss and is not suitable for all investors. Past performance is not indicative of future results.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Infographic Component Script -->
+    <script type="text/babel">
+        // Access the Recharts library from the global variable
+        const {
+            ResponsiveContainer, BarChart, Bar, LineChart, Line, AreaChart, Area,
+            XAxis, YAxis, CartesianGrid, Tooltip, Legend
+        } = Recharts;
+
+        // The Icons components using Font Awesome
+        const Icons = {
+            Coins: () => <i className="fas fa-coins text-yellow-400 mr-2"></i>,
+            TrendingUp: () => <i className="fas fa-chart-line text-green-400 mr-2"></i>,
+            ArrowDownRight: () => <i className="fas fa-arrow-down text-pink-400 mr-2"></i>,
+            BarChart3: () => <i className="fas fa-chart-bar text-purple-400 mr-2"></i>,
+            Calendar: () => <i className="fas fa-calendar text-cyan-400 mr-2"></i>,
+            Zap: () => <i className="fas fa-bolt text-yellow-400 mr-2"></i>
+        };
+
+        // Main BacktestInfographic component
+        const BacktestInfographic = () => {
+            // Data from the heatmap
+            const monthlyReturns = {
+                2020: [0.0, 1.0, 1.0, 7.0, -2.0, 13.0, 6.0, 0.0, 4.0, -1.0, 9.0, null],
+                2021: [-10.0, -6.0, -1.0, 3.0, 0.0, 1.0, 4.0, 4.0, -1.0, -2.0, 2.0, -1.0],
+                2022: [3.0, -1.0, 4.0, 4.0, -6.0, 3.0, -4.0, -1.0, 4.0, -6.0, -3.0, -1.0],
+                2023: [-5.0, -2.0, 0.0, 0.0, 0.0, -1.0, 1.0, 2.0, -1.0, 4.0, -2.0, 2.0],
+                2024: [2.0, 14.0, -1.0, 1.0, 0.0, -1.0, 0.0, -1.0, -1.0, 4.0, 6.0, 1.0],
+                2025: [-2.0, 5.0, -2.0, null, null, null, null, null, null, null, null, null]
+            };
+
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            
+            // Calculate yearly returns
+            const yearlyReturns = Object.entries(monthlyReturns).map(([year, returns]) => {
+                const validReturns = returns.filter(r => r !== null);
+                const yearReturn = validReturns.reduce((acc, val) => (1 + acc) * (1 + val/100) - 1, 0) * 100;
+                return {
+                    year,
+                    return: parseFloat(yearReturn.toFixed(2))
+                };
+            });
+
+            // Calculate cumulative growth of $10,000
+            const calculateCumulativeGrowth = () => {
+                let currentValue = 10000;
+                const dataPoints = [];
+                
+                Object.entries(monthlyReturns).forEach(([year, returns]) => {
+                    returns.forEach((monthReturn, monthIndex) => {
+                        if (monthReturn !== null) {
+                            currentValue = currentValue * (1 + monthReturn/100);
+                            dataPoints.push({
+                                date: `${year}-${months[monthIndex]}`,
+                                value: Math.round(currentValue)
+                            });
+                        }
+                    });
+                });
+                
+                return dataPoints;
+            };
+
+            const cumulativeGrowth = calculateCumulativeGrowth();
+
+            // Calculate best and worst months
+            const allReturns = [];
+            Object.entries(monthlyReturns).forEach(([year, returns]) => {
+                returns.forEach((monthReturn, monthIndex) => {
+                    if (monthReturn !== null) {
+                        allReturns.push({
+                            date: `${year}-${months[monthIndex]}`,
+                            return: monthReturn
+                        });
+                    }
+                });
+            });
+
+            const bestMonth = [...allReturns].sort((a, b) => b.return - a.return)[0];
+            const worstMonth = [...allReturns].sort((a, b) => a.return - b.return)[0];
+
+            // Calculate winning percentage
+            const positiveMonths = allReturns.filter(item => item.return > 0).length;
+            const winPercentage = Math.round((positiveMonths / allReturns.length) * 100);
+
+            // Calculate maximum drawdown
+            const calculateMaxDrawdown = () => {
+                let peak = 10000;
+                let maxDrawdown = 0;
+                let currentDrawdown = 0;
+                let peakDate = '';
+                let bottomDate = '';
+                
+                let currentValue = 10000;
+                
+                Object.entries(monthlyReturns).forEach(([year, returns]) => {
+                    returns.forEach((monthReturn, monthIndex) => {
+                        if (monthReturn !== null) {
+                            currentValue = currentValue * (1 + monthReturn/100);
+                            
+                            if (currentValue > peak) {
+                                peak = currentValue;
+                                peakDate = `${year}-${months[monthIndex]}`;
+                            }
+                            
+                            currentDrawdown = (currentValue - peak) / peak * 100;
+                            
+                            if (currentDrawdown < maxDrawdown) {
+                                maxDrawdown = currentDrawdown;
+                                bottomDate = `${year}-${months[monthIndex]}`;
+                            }
+                        }
+                    });
+                });
+                
+                return {
+                    maxDrawdown: parseFloat(maxDrawdown.toFixed(2)),
+                    peakDate,
+                    bottomDate
+                };
+            };
+
+            const drawdownInfo = calculateMaxDrawdown();
+
+            // Create heatmap data in a format suitable for visualization
+            const createHeatmapData = () => {
+                const data = [];
+                
+                for (let monthIndex = 0; monthIndex < 12; monthIndex++) {
+                    const monthData = {
+                        month: months[monthIndex],
+                    };
+                    
+                    Object.entries(monthlyReturns).forEach(([year, returns]) => {
+                        monthData[year] = returns[monthIndex];
+                    });
+                    
+                    data.push(monthData);
+                }
+                
+                return data;
+            };
+
+            const heatmapData = createHeatmapData();
+            const years = Object.keys(monthlyReturns);
+
+            return (
+                <div className="flex flex-col p-4 space-y-8 bg-gray-900 text-blue-100">
+                    <div className="text-center">
+                        <h1 className="text-2xl font-bold mb-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-transparent bg-clip-text">DeFi Strategy Backtest Results</h1>
+                        <div className="flex items-center justify-center gap-2">
+                            <Icons.Coins />
+                            <p className="text-blue-300">Blockchain Performance Analysis (2020-2025)</p>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {/* Key Performance Metrics */}
+                        <div className="bg-gray-800 p-6 rounded-lg shadow-lg border border-indigo-900">
+                            <div className="flex items-center mb-4">
+                                <Icons.Zap />
+                                <h2 className="text-xl font-semibold text-blue-100">Token Performance Metrics</h2>
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="border-r border-gray-700 pr-4">
+                                    <p className="text-sm text-blue-300">ATH Month</p>
+                                    <p className="text-lg font-medium text-green-400">{bestMonth.return}% <span className="text-sm text-blue-300">({bestMonth.date})</span></p>
+                                </div>
+                                <div>
+                                    <p className="text-sm text-blue-300">Max Correction</p>
+                                    <p className="text-lg font-medium text-red-400">{worstMonth.return}% <span className="text-sm text-blue-300">({worstMonth.date})</span></p>
+                                </div>
+                                <div className="border-r border-gray-700 pr-4">
+                                    <p className="text-sm text-blue-300">Green Candles</p>
+                                    <p className="text-lg font-medium text-green-400">{winPercentage}%</p>
+                                </div>
+                                <div>
+                                    <p className="text-sm text-blue-300">Max Drawdown</p>
+                                    <p className="text-lg font-medium text-red-400">{drawdownInfo.maxDrawdown}%</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Yearly Performance */}
+                        <div className="bg-gray-800 p-6 rounded-lg shadow-lg border border-indigo-900">
+                            <div className="flex items-center mb-4">
+                                <Icons.BarChart3 />
+                                <h2 className="text-xl font-semibold text-blue-100">Yearly Token Returns</h2>
+                            </div>
+                            <div className="h-48">
+                                <ResponsiveContainer width="100%" height="100%">
+                                    <BarChart data={yearlyReturns}>
+                                        <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.2} />
+                                        <XAxis dataKey="year" stroke="#8884d8" />
+                                        <YAxis tickFormatter={(value) => `${value}%`} stroke="#8884d8" />
+                                        <Tooltip 
+                                            formatter={(value) => [`${value}%`, 'Yield']} 
+                                            contentStyle={{ backgroundColor: '#1f2937', borderColor: '#4f46e5', borderRadius: '0.5rem' }}
+                                            labelStyle={{ color: '#93c5fd' }}
+                                            itemStyle={{ color: '#93c5fd' }}
+                                        />
+                                        <Bar 
+                                            dataKey="return" 
+                                            fill={(data) => data.return >= 0 ? '#10b981' : '#ef4444'}
+                                            radius={[4, 4, 0, 0]}
+                                        />
+                                    </BarChart>
+                                </ResponsiveContainer>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Monthly Returns Heatmap */}
+                    <div className="bg-gray-800 p-6 rounded-lg shadow-lg border border-indigo-900">
+                        <div className="flex items-center mb-4">
+                            <Icons.Calendar />
+                            <h2 className="text-xl font-semibold text-blue-100">Token Yield Heatmap (%)</h2>
+                        </div>
+                        <div className="overflow-x-auto">
+                            <table className="min-w-full">
+                                <thead>
+                                    <tr className="bg-gray-900">
+                                        <th className="border border-indigo-900 p-2 text-blue-300">Epoch / Block</th>
+                                        {months.map(month => (
+                                            <th key={month} className="border border-indigo-900 p-2 text-sm text-blue-300">{month}</th>
+                                        ))}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {years.map(year => (
+                                        <tr key={year} className="bg-gray-900 hover:bg-gray-800">
+                                            <td className="border border-indigo-900 p-2 font-medium text-purple-300">{year}</td>
+                                            {monthlyReturns[year].map((value, index) => {
+                                                const bgColor = value !== null ? 
+                                                    (value >= 0 ? `rgba(16, 185, 129, ${Math.min(0.2 + Math.abs(value)/20, 0.9)})` : 
+                                                                `rgba(239, 68, 68, ${Math.min(0.2 + Math.abs(value)/20, 0.9)}`) : 
+                                                    'transparent';
+                                                
+                                                return (
+                                                    <td 
+                                                        key={index} 
+                                                        className="border border-indigo-900 p-2 text-center" 
+                                                        style={{ backgroundColor: bgColor }}
+                                                    >
+                                                        {value !== null ? (
+                                                            <span className={value >= 0 ? "text-green-300" : "text-red-300"}>
+                                                                {value.toFixed(1)}
+                                                            </span>
+                                                        ) : ''}
+                                                    </td>
+                                                );
+                                            })}
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    {/* Growth Chart */}
+                    <div className="bg-gray-800 p-6 rounded-lg shadow-lg border border-indigo-900">
+                        <div className="flex items-center mb-4">
+                            <Icons.TrendingUp />
+                            <h2 className="text-xl font-semibold text-blue-100">10,000 USDC to Token Growth</h2>
+                        </div>
+                        <div className="h-64">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <AreaChart data={cumulativeGrowth}>
+                                    <defs>
+                                        <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
+                                            <stop offset="95%" stopColor="#8884d8" stopOpacity={0.1}/>
+                                        </linearGradient>
+                                    </defs>
+                                    <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.2} />
+                                    <XAxis 
+                                        dataKey="date" 
+                                        tickFormatter={(value) => value.split('-')[1]}
+                                        interval={Math.floor(cumulativeGrowth.length / 10)} 
+                                        stroke="#8884d8"
+                                    />
+                                    <YAxis 
+                                        tickFormatter={(value) => `${value.toLocaleString()} USDC`} 
+                                        domain={['dataMin', 'dataMax']} 
+                                        stroke="#8884d8"
+                                    />
+                                    <Tooltip 
+                                        formatter={(value) => [`${value.toLocaleString()} USDC`, 'Token Value']} 
+                                        contentStyle={{ backgroundColor: '#1f2937', borderColor: '#4f46e5', borderRadius: '0.5rem' }}
+                                        labelStyle={{ color: '#93c5fd' }}
+                                        itemStyle={{ color: '#93c5fd' }}
+                                    />
+                                    <Legend />
+                                    <Area 
+                                        type="monotone" 
+                                        dataKey="value" 
+                                        stroke="#8884d8" 
+                                        strokeWidth={2}
+                                        fillOpacity={1}
+                                        fill="url(#colorValue)"
+                                        name="Token Holdings" 
+                                    />
+                                </AreaChart>
+                            </ResponsiveContainer>
+                        </div>
+                    </div>
+
+                    <div className="flex flex-col gap-4 p-6 bg-gray-800 rounded-lg shadow-lg border border-indigo-900">
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center">
+                                <Icons.Coins />
+                                <h2 className="text-xl font-semibold text-blue-100">Strategy Info</h2>
+                            </div>
+                            <div className="px-3 py-1 bg-indigo-900 rounded-full text-xs font-medium text-blue-100">
+                                v1.3.7
+                            </div>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div className="bg-gray-900 p-3 rounded-lg">
+                                <p className="text-xs text-blue-300 mb-1">Smart Contract Audited</p>
+                                <p className="text-sm text-blue-100">CertiK, Hacken, SlowMist</p>
+                            </div>
+                            <div className="bg-gray-900 p-3 rounded-lg">
+                                <p className="text-xs text-blue-300 mb-1">Protocol Type</p>
+                                <p className="text-sm text-blue-100">Yield Aggregator + LP Optimization</p>
+                            </div>
+                            <div className="bg-gray-900 p-3 rounded-lg">
+                                <p className="text-xs text-blue-300 mb-1">Chains Supported</p>
+                                <p className="text-sm text-blue-100">Ethereum, Arbitrum, Optimism, Base</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // Render the component
+        ReactDOM.render(
+            <BacktestInfographic />,
+            document.getElementById('backtest-infographic')
+        );
+    </script>
+</body>
+</html>
