@@ -27,19 +27,56 @@
         .swipe-container {
             display: flex;
             width: 100%;
-            height: 100%;
+            height: 100vh; /* Use viewport height for full screen */
             overflow: hidden;
             position: relative;
         }
         
         .swipe-screen {
             min-width: 100%;
-            height: 100%;
+            height: 100vh; /* Use viewport height to ensure full screen */
             transition: transform 0.5s ease;
             position: relative;
-            overflow-y: auto;
+            overflow-y: auto; /* Only allow vertical scrolling if absolutely necessary */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding-bottom: 100px; /* Add padding for navigation controls */
         }
         
+        /* Content container with fixed height and scrolling if needed */
+        .swipe-content {
+            flex: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch; /* Better scrolling on iOS */
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center content vertically */
+        }
+        
+        /* Make sure content doesn't overflow screen height */
+        .swipe-screen section {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            min-height: 0; /* Allow section to shrink */
+        }
+        
+        /* Adjust heights to fit content on screen */
+        .swipe-screen h1 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .swipe-screen p {
+            margin-bottom: 0.5rem;
+        }
+        
+        .swipe-screen .pb-24 {
+            padding-bottom: 2rem !important;
+        }
+        
+        /* Fixed position for navigation controls */
         .swipe-navigation {
             position: fixed;
             bottom: 30px;
@@ -50,6 +87,7 @@
             align-items: center;
             gap: 20px;
             z-index: 10;
+            pointer-events: auto; /* Ensure buttons are clickable */
         }
         
         .swipe-nav-button {
@@ -57,14 +95,16 @@
             color: white;
             border: none;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 50px; /* Larger button for easier tapping */
+            height: 50px; /* Larger button for easier tapping */
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            -webkit-tap-highlight-color: transparent; /* Remove highlight on tap for iOS */
+            touch-action: manipulation; /* Optimization for touch */
         }
         
         .swipe-indicators {
@@ -74,16 +114,21 @@
             width: 100%;
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 15px; /* Wider spacing for easier tapping */
             z-index: 10;
+            pointer-events: auto; /* Ensure indicators are clickable */
         }
         
         .swipe-indicator {
-            width: 10px;
-            height: 10px;
+            width: 12px; /* Slightly larger for easier tapping */
+            height: 12px; /* Slightly larger for easier tapping */
             border-radius: 50%;
             background-color: rgba(99, 102, 241, 0.3); /* indigo color scheme */
             cursor: pointer;
+            padding: 0; /* Fix for iOS */
+            margin: 0; /* Fix for iOS */
+            -webkit-tap-highlight-color: transparent; /* Remove highlight on tap for iOS */
+            touch-action: manipulation; /* Optimization for touch */
         }
         
         .swipe-indicator.active {
@@ -156,118 +201,114 @@
     <div class="swipe-container gradient-bg" id="swipeContainer">
         <!-- Screen 1: Hero Section -->
         <div class="swipe-screen" id="screen1">
-            <!-- Hero Section -->
-            <section class="py-16 px-6">
-                <div class="max-w-7xl mx-auto flex flex-col items-center">
-                    <div class="mb-8">
-                        <h1 class="text-3xl md:text-5xl font-bold mb-6 text-center">
-                            Automated Crypto Trading in <span class="gradient-text">Just 5 Minutes Daily</span>
-                        </h1>
-                        <p class="text-lg text-gray-300 mb-6 text-center">
-                            Our proprietary algorithm delivers 40% annualized returns while saving you hours of screen time and emotional stress.
-                        </p>
-                        <p class="text-sm text-gray-400 mb-6 text-center">
-                            <i class="fas fa-info-circle mr-2 text-yellow-400"></i>
-                            Past performance is not indicative of future results. Cryptocurrency trading involves risk.
-                        </p>
-                        <div class="flex flex-col gap-4 items-center">
-                            <a href="#signup" class="bg-indigo-600 hover:bg-indigo-700 px-6 py-3 rounded-lg shadow-md text-center font-medium transition w-full max-w-xs">
-                                Start Your 14-Day Trial
-                            </a>
-                            <a href="#" class="border border-indigo-600 hover:bg-indigo-900 px-6 py-3 rounded-lg text-center font-medium transition w-full max-w-xs swipe-next-btn">
-                                See How It Works
-                            </a>
+            <div class="swipe-content">
+                <!-- Hero Section -->
+                <section>
+                    <div class="max-w-7xl mx-auto flex flex-col items-center">
+                        <div class="mb-4">
+                            <h1 class="text-2xl md:text-4xl font-bold mb-3 text-center">
+                                Automated Crypto Trading in <span class="gradient-text">Just 5 Minutes Daily</span>
+                            </h1>
+                            <p class="text-base text-gray-300 mb-3 text-center">
+                                Our algorithm delivers 40% annualized returns with minimal screen time.
+                            </p>
+                            <div class="flex flex-col gap-3 items-center">
+                                <a href="#signup" class="bg-indigo-600 hover:bg-indigo-700 px-6 py-2 rounded-lg shadow-md text-center font-medium transition w-full max-w-xs">
+                                    Start Your 14-Day Trial
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="relative w-full max-w-md">
-                        <div class="absolute inset-0 bg-indigo-500 bg-opacity-20 rounded-lg filter blur-xl"></div>
-                        <img src="/api/placeholder/800/600" alt="Trading dashboard with clear buy/sell signals" class="relative rounded-lg shadow-2xl">
-                    </div>
-                    
-                    <!-- Key Stats -->
-                    <div class="w-full mt-12">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="stat-card flex flex-col items-center p-4 rounded-lg bg-gray-800 bg-opacity-60">
-                                <span class="text-2xl font-bold text-indigo-400">5 min</span>
-                                <span class="text-xs text-gray-400">Daily Time Required</span>
-                            </div>
-                            <div class="stat-card flex flex-col items-center p-4 rounded-lg bg-gray-800 bg-opacity-60">
-                                <span class="text-2xl font-bold text-green-400">40%</span>
-                                <span class="text-xs text-gray-400">Annual Return</span>
-                            </div>
-                            <div class="stat-card flex flex-col items-center p-4 rounded-lg bg-gray-800 bg-opacity-60">
-                                <span class="text-2xl font-bold text-yellow-400">74%</span>
-                                <span class="text-xs text-gray-400">Win Rate</span>
-                            </div>
-                            <div class="stat-card flex flex-col items-center p-4 rounded-lg bg-gray-800 bg-opacity-60">
-                                <span class="text-2xl font-bold text-red-400">12%</span>
-                                <span class="text-xs text-gray-400">Max Drawdown</span>
+                        <div class="relative w-full max-w-md mb-4">
+                            <div class="absolute inset-0 bg-indigo-500 bg-opacity-20 rounded-lg filter blur-xl"></div>
+                            <img src="/api/placeholder/800/400" alt="Trading dashboard" class="relative rounded-lg shadow-xl">
+                        </div>
+                        
+                        <!-- Key Stats -->
+                        <div class="w-full">
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="stat-card flex flex-col items-center p-2 rounded-lg bg-gray-800 bg-opacity-60">
+                                    <span class="text-xl font-bold text-indigo-400">5 min</span>
+                                    <span class="text-xs text-gray-400">Daily Time</span>
+                                </div>
+                                <div class="stat-card flex flex-col items-center p-2 rounded-lg bg-gray-800 bg-opacity-60">
+                                    <span class="text-xl font-bold text-green-400">40%</span>
+                                    <span class="text-xs text-gray-400">Annual Return</span>
+                                </div>
+                                <div class="stat-card flex flex-col items-center p-2 rounded-lg bg-gray-800 bg-opacity-60">
+                                    <span class="text-xl font-bold text-yellow-400">74%</span>
+                                    <span class="text-xs text-gray-400">Win Rate</span>
+                                </div>
+                                <div class="stat-card flex flex-col items-center p-2 rounded-lg bg-gray-800 bg-opacity-60">
+                                    <span class="text-xl font-bold text-red-400">12%</span>
+                                    <span class="text-xs text-gray-400">Max Drawdown</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
             
-            <div class="text-center pb-24">
-                <p class="text-indigo-400">Swipe left to see how it works</p>
+            <div class="text-center pb-12">
+                <p class="text-indigo-400 text-sm">Swipe left to see how it works</p>
                 <i class="fas fa-arrow-right text-indigo-400 animate-pulse"></i>
             </div>
         </div>
         
         <!-- Screen 2: How It Works -->
         <div class="swipe-screen" id="screen2">
-            <section id="how-it-works-mobile" class="py-16 px-6">
-                <div class="max-w-7xl mx-auto">
-                    <div class="text-center mb-12">
-                        <h2 class="text-3xl font-bold mb-4">How CryptoTrend Alpha Works</h2>
-                        <p class="text-lg text-gray-300">
-                            A simple, three-step process that takes just 5 minutes of your day
-                        </p>
-                    </div>
-                    
-                    <div class="space-y-8">
-                        <div class="feature-card p-6 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900 transition duration-300">
-                            <div class="w-14 h-14 mb-6 flex items-center justify-center rounded-full bg-indigo-900 text-indigo-300">
-                                <i class="fas fa-bell text-2xl"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-3">1. Receive Daily Signals</h3>
-                            <p class="text-gray-400">
-                                Each morning, receive clear trading signals based on our proprietary algorithm that analyzes market trends across multiple timeframes.
+            <div class="swipe-content">
+                <section id="how-it-works-mobile">
+                    <div class="max-w-7xl mx-auto">
+                        <div class="text-center mb-4">
+                            <h2 class="text-2xl font-bold mb-2">How CryptoTrend Alpha Works</h2>
+                            <p class="text-base text-gray-300">
+                                A simple three-step process
                             </p>
                         </div>
                         
-                        <div class="feature-card p-6 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900 transition duration-300">
-                            <div class="w-14 h-14 mb-6 flex items-center justify-center rounded-full bg-indigo-900 text-indigo-300">
-                                <i class="fas fa-check-circle text-2xl"></i>
+                        <div class="space-y-3">
+                            <div class="feature-card p-3 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900 transition duration-300 flex items-center">
+                                <div class="w-10 h-10 mr-3 flex items-center justify-center rounded-full bg-indigo-900 text-indigo-300 flex-shrink-0">
+                                    <i class="fas fa-bell"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-base font-semibold mb-1">1. Receive Daily Signals</h3>
+                                    <p class="text-xs text-gray-400">
+                                        Each morning, get clear trading signals based on our proprietary algorithm.
+                                    </p>
+                                </div>
                             </div>
-                            <h3 class="text-xl font-semibold mb-3">2. Review & Approve</h3>
-                            <p class="text-gray-400">
-                                Simply review the recommended trades in your dashboard—clear buy, sell, or hold signals for each asset in your portfolio.
-                            </p>
-                        </div>
-                        
-                        <div class="feature-card p-6 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900 transition duration-300">
-                            <div class="w-14 h-14 mb-6 flex items-center justify-center rounded-full bg-indigo-900 text-indigo-300">
-                                <i class="fas fa-rocket text-2xl"></i>
+                            
+                            <div class="feature-card p-3 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900 transition duration-300 flex items-center">
+                                <div class="w-10 h-10 mr-3 flex items-center justify-center rounded-full bg-indigo-900 text-indigo-300 flex-shrink-0">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-base font-semibold mb-1">2. Review & Approve</h3>
+                                    <p class="text-xs text-gray-400">
+                                        Review the recommended trades in your dashboard with clear buy/sell signals.
+                                    </p>
+                                </div>
                             </div>
-                            <h3 class="text-xl font-semibold mb-3">3. Execute & Relax</h3>
-                            <p class="text-gray-400">
-                                Execute the trades with one click and go about your day. Our algorithm continuously monitors the market so you don't have to.
-                            </p>
+                            
+                            <div class="feature-card p-3 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900 transition duration-300 flex items-center">
+                                <div class="w-10 h-10 mr-3 flex items-center justify-center rounded-full bg-indigo-900 text-indigo-300 flex-shrink-0">
+                                    <i class="fas fa-rocket"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-base font-semibold mb-1">3. Execute & Relax</h3>
+                                    <p class="text-xs text-gray-400">
+                                        Execute trades with one click and go about your day while our algorithm monitors the market.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="mt-12 flex justify-center">
-                        <a href="#signup" class="flex items-center space-x-2 text-indigo-400 hover:text-indigo-300 transition">
-                            <span>Try it yourself with our 14-day trial</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </section>
+                </section>
+            </div>
             
-            <div class="text-center pb-24">
-                <p class="text-indigo-400">Swipe left to see performance</p>
+            <div class="text-center pb-12">
+                <p class="text-indigo-400 text-sm">Swipe left to see performance</p>
                 <i class="fas fa-arrow-right text-indigo-400 animate-pulse"></i>
             </div>
         </div>
@@ -328,84 +369,95 @@
         
         <!-- Screen 4: Pricing & Sign Up -->
         <div class="swipe-screen" id="screen4">
-            <section id="pricing-mobile" class="py-16 px-6">
-                <div class="max-w-7xl mx-auto">
-                    <div class="text-center mb-12">
-                        <h2 class="text-3xl font-bold mb-4">Performance-Based Pricing</h2>
-                        <p class="text-lg text-gray-300">
-                            We only succeed when you succeed
-                        </p>
-                    </div>
-                    
-                    <!-- Simple Pricing Box -->
-                    <div class="bg-indigo-900 bg-opacity-40 rounded-xl border border-indigo-500 p-6 shadow-xl mb-8">
-                        <div class="text-center">
-                            <h3 class="text-xl font-bold mb-3">One Simple Plan for Everyone</h3>
-                            <p class="text-base text-gray-300 mb-6">Same great features for traders of all levels</p>
-                            
-                            <div class="flex flex-col items-center space-y-4 mb-6">
-                                <div class="text-center">
-                                    <p class="text-gray-400 text-sm">Monthly Subscription</p>
-                                    <p class="text-3xl font-bold">₹1,500</p>
+            <div class="swipe-content">
+                <section id="pricing-mobile">
+                    <div class="max-w-7xl mx-auto">
+                        <div class="text-center mb-4">
+                            <h2 class="text-2xl font-bold mb-2">Performance-Based Pricing</h2>
+                            <p class="text-base text-gray-300">
+                                We succeed when you succeed
+                            </p>
+                        </div>
+                        
+                        <!-- Simple Pricing Box -->
+                        <div class="bg-indigo-900 bg-opacity-40 rounded-xl border border-indigo-500 p-4 shadow-md mb-4">
+                            <div class="text-center">
+                                <h3 class="text-xl font-bold mb-2">One Simple Plan</h3>
+                                
+                                <div class="flex justify-center items-center space-x-4 mb-4">
+                                    <div class="text-center">
+                                        <p class="text-gray-400 text-xs">Monthly</p>
+                                        <p class="text-2xl font-bold">₹1,500</p>
+                                    </div>
+                                    <div class="text-2xl font-bold text-gray-400">+</div>
+                                    <div class="text-center">
+                                        <p class="text-gray-400 text-xs">Performance</p>
+                                        <p class="text-2xl font-bold">20%</p>
+                                        <p class="text-xs text-gray-400">of new profits</p>
+                                    </div>
                                 </div>
-                                <div class="text-2xl font-bold text-gray-400">+</div>
-                                <div class="text-center">
-                                    <p class="text-gray-400 text-sm">Performance Fee</p>
-                                    <p class="text-3xl font-bold">20%</p>
-                                    <p class="text-sm text-gray-400">of new profits only</p>
-                                </div>
+                                
+                                <a href="#signup" class="inline-block bg-indigo-500 hover:bg-indigo-600 px-6 py-2 rounded-lg shadow-md font-medium text-base transition">
+                                    Start 14-Day Trial
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Features Summary -->
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="p-2 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900">
+                                <h3 class="text-sm font-semibold mb-1 flex items-center">
+                                    <i class="fas fa-robot text-indigo-400 mr-1 text-xs"></i>
+                                    Algorithm
+                                </h3>
+                                <ul class="text-xs">
+                                    <li class="flex items-center mb-1">
+                                        <i class="fas fa-check text-green-400 mr-1 text-xs"></i>
+                                        <span>Major crypto pairs</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-1 text-xs"></i>
+                                        <span>Daily signals</span>
+                                    </li>
+                                </ul>
                             </div>
                             
-                            <a href="#signup" class="inline-block bg-indigo-500 hover:bg-indigo-600 px-8 py-3 rounded-lg shadow-md font-medium text-lg transition">
-                                Start Your 14-Day Trial
-                            </a>
+                            <div class="p-2 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900">
+                                <h3 class="text-sm font-semibold mb-1 flex items-center">
+                                    <i class="fas fa-headset text-indigo-400 mr-1 text-xs"></i>
+                                    Support
+                                </h3>
+                                <ul class="text-xs">
+                                    <li class="flex items-center mb-1">
+                                        <i class="fas fa-check text-green-400 mr-1 text-xs"></i>
+                                        <span>Priority email</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-1 text-xs"></i>
+                                        <span>14-day guarantee</span>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    
-                    <!-- Sign Up Form -->
-                    <div class="bg-gray-800 p-6 rounded-xl border border-indigo-900 shadow-xl">
-                        <h3 class="text-xl font-semibold mb-6">Create Your Account</h3>
-                        <form>
-                            <div class="mb-4">
-                                <label class="block text-gray-300 mb-2" for="name-mobile">Full Name</label>
-                                <input type="text" id="name-mobile" class="w-full bg-gray-900 border border-indigo-800 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                            </div>
-                            
-                            <div class="mb-4">
-                                <label class="block text-gray-300 mb-2" for="email-mobile">Email Address</label>
-                                <input type="email" id="email-mobile" class="w-full bg-gray-900 border border-indigo-800 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                            </div>
-                            
-                            <div class="mb-4">
-                                <label class="block text-gray-300 mb-2" for="phone-mobile">Phone Number</label>
-                                <input type="tel" id="phone-mobile" class="w-full bg-gray-900 border border-indigo-800 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                            </div>
-                            
-                            <div class="mb-6">
-                                <label class="block text-gray-300 mb-2" for="investment-mobile">Initial Investment Amount</label>
-                                <select id="investment-mobile" class="w-full bg-gray-900 border border-indigo-800 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                                    <option value="">Select Amount</option>
-                                    <option value="50000">₹50,000 - ₹1,00,000</option>
-                                    <option value="100000">₹1,00,000 - ₹2,00,000</option>
-                                    <option value="200000">₹2,00,000 - ₹5,00,000</option>
-                                    <option value="500000">₹5,00,000 - ₹10,00,000</option>
-                                    <option value="1000000">₹10,00,000+</option>
-                                </select>
-                            </div>
-                            
-                            <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 py-3 rounded-lg text-center font-medium transition">
-                                Start Your 14-Day Trial
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </section>
+                </section>
+            </div>
             
-            <div class="text-center pb-24">
-                <p class="text-indigo-400">Swipe right to return to the start</p>
+            <div class="text-center pb-12">
+                <p class="text-indigo-400 text-sm">Swipe right to start over</p>
                 <i class="fas fa-arrow-left text-indigo-400 animate-pulse"></i>
             </div>
         </div>
+        
+        <style>
+            /* Add gradient background directly to the swipe screens */
+            .swipe-screen:nth-child(1),
+            .swipe-screen:nth-child(2),
+            .swipe-screen:nth-child(3),
+            .swipe-screen:nth-child(4) {
+                background: linear-gradient(135deg, #1e293b, #0f172a);
+            }
+        </style>
     </div>
 
     <!-- Swipe Navigation Controls -->
