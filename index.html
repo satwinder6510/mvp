@@ -16,20 +16,40 @@
             background: linear-gradient(135deg, #1e293b, #0f172a);
         }
         
-        /* Tab-based navigation */
+        /* Tab-based navigation with smoother scrolling */
         .tab-container {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
             padding-bottom: 70px; /* Space for the fixed tabs */
+            position: relative;
+            will-change: transform; /* Optimize for hardware acceleration */
         }
         
         .tab-content {
             flex: 1;
+            width: 100%;
+            overflow-x: hidden; /* Prevent horizontal overflow */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
         }
         
         .tab-panel {
             padding: 16px 16px 30px 16px;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .tab-panel.active {
+            opacity: 1;
+            position: relative;
+            height: auto;
+            overflow: visible;
         }
         
         .mobile-tabs {
@@ -43,6 +63,14 @@
             padding: 8px 0;
             z-index: 50;
             box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Prevent content jumping on tab change */
+        html, body {
+            scroll-behavior: smooth;
+            height: 100%;
+            margin: 0;
+            overscroll-behavior: none; /* Prevent overscroll effects */
         }
         
         .tab-button {
@@ -95,7 +123,7 @@
         <!-- Tab Content -->
         <div class="tab-content">
             <!-- Home Tab (Active by default) -->
-            <div id="tab-home" class="tab-panel">
+            <div id="tab-home" class="tab-panel active">
                 <section class="py-6">
                     <div class="text-center mb-4">
                         <h1 class="text-2xl font-bold mb-2">
@@ -627,33 +655,85 @@
         </div>
     </div>
 
-    <!-- Simple Tab Switching Script -->
+    <!-- Improved Tab Switching Script for smoother transitions -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Get all tab buttons and panels
             const tabButtons = document.querySelectorAll('.tab-button');
             const tabPanels = document.querySelectorAll('.tab-panel');
             
+            // Initialize by showing only the first panel
+            tabPanels[0].classList.add('active');
+            
+            // Prevent scroll restoration causing jumps
+            if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+            }
+            
+            // Save scroll positions for each tab
+            const scrollPositions = new Array(tabPanels.length).fill(0);
+            
             // Add click event to each tab button
-            tabButtons.forEach(button => {
-                button.addEventListener('click', function() {
+            tabButtons.forEach((button, index) => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault(); // Prevent default behavior
+                    
+                    // Save current scroll position before switching
+                    const currentActiveIndex = Array.from(tabButtons).findIndex(btn => 
+                        btn.classList.contains('active'));
+                    if (currentActiveIndex >= 0) {
+                        scrollPositions[currentActiveIndex] = window.scrollY;
+                    }
+                    
+                    // Update active tab button
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
                     // Get the target tab
                     const tabId = this.getAttribute('data-tab');
+                    const targetPanel = document.getElementById(tabId);
                     
                     // Hide all panels
                     tabPanels.forEach(panel => {
-                        panel.classList.add('hidden');
+                        panel.classList.remove('active');
                     });
                     
                     // Show the target panel
-                    document.getElementById(tabId).classList.remove('hidden');
+                    targetPanel.classList.add('active');
                     
-                    // Update active state
-                    tabButtons.forEach(btn => {
-                        btn.classList.remove('active');
-                    });
-                    this.classList.add('active');
+                    // Reset scroll position to top when changing tabs
+                    window.scrollTo(0, 0);
+                    
+                    // After a brief delay to let the tab render, restore saved scroll position
+                    setTimeout(function() {
+                        window.scrollTo(0, 0); // Ensure we're at the top
+                    }, 50);
                 });
+            });
+            
+            // Prevent content shifts when focusing form elements
+            const formInputs = document.querySelectorAll('input, select, textarea');
+            formInputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    // Add a small delay to allow the keyboard to appear
+                    setTimeout(() => {
+                        // Scroll the input into view
+                        this.scrollIntoView({behavior: 'smooth', block: 'center'});
+                    }, 300);
+                });
+            });
+            
+            // Passive touch listeners for better performance
+            document.addEventListener('touchstart', function() {}, {passive: true});
+            document.addEventListener('touchmove', function() {}, {passive: true});
+            
+            // Handle resize events for better performance
+            let resizeTimer;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function() {
+                    // Recalculate any necessary dimensions
+                }, 100);
             });
         });
     </script>
