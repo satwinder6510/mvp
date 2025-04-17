@@ -23,7 +23,7 @@
             border: 1px solid rgba(59, 130, 246, 0.2);
         }
         
-        /* Mobile Swipe Navigation Styles */
+        /* Mobile Swipe Navigation Styles - Ultra-simplified */
         .swipe-container {
             display: flex;
             width: 100%;
@@ -62,77 +62,57 @@
             min-height: 0; /* Allow section to shrink */
         }
         
-        /* Adjust heights to fit content on screen */
-        .swipe-screen h1 {
-            font-size: 1.75rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .swipe-screen p {
-            margin-bottom: 0.5rem;
-        }
-        
-        .swipe-screen .pb-24 {
-            padding-bottom: 2rem !important;
-        }
-        
-        /* Fixed position for navigation controls */
+        /* Fixed position for navigation controls - MUCH LARGER for iOS */
         .swipe-navigation {
             position: fixed;
-            bottom: 30px;
+            bottom: 40px;
             left: 0;
             width: 100%;
             display: flex;
-            justify-content: center;
+            justify-content: space-between; /* Push buttons to edges */
+            padding: 0 20px; /* Add padding to sides */
             align-items: center;
-            gap: 20px;
-            z-index: 10;
+            z-index: 30;
             pointer-events: auto; /* Ensure buttons are clickable */
         }
         
         .swipe-nav-button {
-            background-color: rgba(79, 70, 229, 0.8); /* indigo-600 */
+            background-color: rgba(79, 70, 229, 0.9); /* indigo-600 with higher opacity */
             color: white;
             border: none;
             border-radius: 50%;
-            width: 50px; /* Larger button for easier tapping */
-            height: 50px; /* Larger button for easier tapping */
+            width: 60px; /* MUCH larger button for easier tapping */
+            height: 60px; /* MUCH larger button for easier tapping */
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            font-size: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            font-size: 24px; /* Larger icon */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* More visible shadow */
             -webkit-tap-highlight-color: transparent; /* Remove highlight on tap for iOS */
             touch-action: manipulation; /* Optimization for touch */
         }
         
-        .swipe-indicators {
+        /* Simplified indicators - only one indicator that shows progress */
+        .swipe-progress {
             position: fixed;
-            bottom: 80px;
+            bottom: 20px;
             left: 0;
             width: 100%;
-            display: flex;
-            justify-content: center;
-            gap: 15px; /* Wider spacing for easier tapping */
-            z-index: 10;
-            pointer-events: auto; /* Ensure indicators are clickable */
+            height: 5px;
+            background-color: rgba(99, 102, 241, 0.3);
+            z-index: 20;
         }
         
-        .swipe-indicator {
-            width: 12px; /* Slightly larger for easier tapping */
-            height: 12px; /* Slightly larger for easier tapping */
-            border-radius: 50%;
-            background-color: rgba(99, 102, 241, 0.3); /* indigo color scheme */
-            cursor: pointer;
-            padding: 0; /* Fix for iOS */
-            margin: 0; /* Fix for iOS */
-            -webkit-tap-highlight-color: transparent; /* Remove highlight on tap for iOS */
-            touch-action: manipulation; /* Optimization for touch */
+        .swipe-progress-bar {
+            height: 100%;
+            background-color: rgba(99, 102, 241, 0.9);
+            transition: width 0.3s ease;
         }
         
-        .swipe-indicator.active {
-            background-color: rgba(99, 102, 241, 0.9); /* indigo color scheme */
+        /* Hide old indicators */
+        .swipe-indicators {
+            display: none;
         }
         
         /* Hide swipe navigation on larger screens */
@@ -461,13 +441,14 @@
     </div>
 
     <!-- Swipe Navigation Controls -->
-    <div class="swipe-navigation">
+    <div class="swipe-navigation" id="swipeNavigation">
         <button class="swipe-nav-button" id="prevBtn">←</button>
         <button class="swipe-nav-button" id="nextBtn">→</button>
     </div>
     
-    <div class="swipe-indicators" id="swipeIndicators">
-        <!-- Indicators will be added dynamically -->
+    <!-- Simplified progress indicator -->
+    <div class="swipe-progress">
+        <div class="swipe-progress-bar" id="swipeProgressBar" style="width: 25%"></div>
     </div>
 
     <!-- Desktop Content (Original Website) -->
