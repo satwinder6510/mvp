@@ -2,910 +2,1461 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Fixed viewport meta tag -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>CryptoTrend Alpha | Automated Crypto Trading in 5 Minutes Daily</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>CryptoTrend Alpha | Automated Crypto Trading</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        /* Global Styles */
-        .gradient-text {
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* Base Styles */
+        :root {
+            --cream: #f8f5f1;
+            --dark-green: #124947;
+            --light-green: #2ca793;
+            --accent-orange: #f3704b;
+            --text-dark: #1a2b2a;
+            --text-medium: #3c5655;
+            --text-light: #637776;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.07), 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
-        .gradient-bg {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        .serif-heading {
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--dark-green);
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--light-green);
+        }
+        
+        /* Layout */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .flex {
+            display: flex;
+        }
+        
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            font-size: 1.125rem;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent-orange);
+            color: white;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background-color: #e05a36;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--dark-green);
+            border: 2px solid var(--dark-green);
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(18, 73, 71, 0.05);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .btn-outline-white {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-outline-white:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        /* Card Styles */
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        /* Stat Card */
+        .stat-card {
+            padding: 2rem;
+            text-align: center;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--dark-green), var(--light-green));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-green);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        
+        /* Step Card */
+        .step-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -1.25rem;
+            left: 1.5rem;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            background-color: var(--accent-orange);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 10px rgba(243, 112, 75, 0.3);
+        }
+        
+        .step-icon {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            background-color: rgba(18, 73, 71, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-green);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Feature Card */
+        .feature-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
         }
         
         .feature-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.4);
+            box-shadow: var(--shadow-hover);
         }
         
-        .stat-card {
-            border: 1px solid rgba(59, 130, 246, 0.2);
+        .feature-icon-container {
+            height: 12rem;
+            background-color: rgba(18, 73, 71, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
-        /* Primary CTA Button - Green for positive action/conversion */
-        .btn-primary {
-            background-color: #10b981; /* Vibrant green */
-            color: white;
-            transition: all 0.2s ease;
-        }
-        .btn-primary:hover, .btn-primary:active {
-            background-color: #059669; /* Slightly darker green on hover/active */
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--light-green);
         }
         
-        /* Secondary CTA Button - Orange for attention/urgency */
-        .btn-secondary {
-            background-color: #f97316; /* Vibrant orange */
-            color: white;
-            transition: all 0.2s ease;
-        }
-        .btn-secondary:hover, .btn-secondary:active {
-            background-color: #ea580c; /* Slightly darker orange on hover/active */
+        .feature-content {
+            padding: 2rem;
         }
         
-        /* Tertiary action - Indigo for non-primary actions */
-        .btn-tertiary {
-            background-color: rgba(79, 70, 229, 0.9); /* indigo-600 with higher opacity */
-            color: white;
-            transition: all 0.2s ease;
-        }
-        .btn-tertiary:hover, .btn-tertiary:active {
-            background-color: rgba(67, 56, 202, 0.9); /* indigo-700 */
-        }
-        
-        .highlight-text {
-            color: #10b981; /* Match our primary green CTA color */
+        /* Navigation */
+        .header {
+            background-color: var(--cream);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
         }
         
-        /* Unique background gradients for each tab */
-        .tab-home-bg {
-            background: linear-gradient(135deg, #1a237e, #0d47a1);
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
-        .tab-how-bg {
-            background: linear-gradient(135deg, #0f172a, #1e1b4b);
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-green);
         }
         
-        .tab-performance-bg {
-            background: linear-gradient(135deg, #134e4a, #0f172a);
+        .logo span {
+            color: var(--light-green);
         }
         
-        .tab-pricing-bg {
-            background: linear-gradient(135deg, #3f2c50, #0f172a);
+        .nav-links {
+            display: flex;
+            gap: 2rem;
         }
         
-        /* Mobile Tab-based navigation */
-        @media (max-width: 767px) {
-            body {
-                overflow-x: hidden;
-            }
-            
-            .tab-container {
-                display: flex;
-                flex-direction: column;
-                min-height: 100vh;
-                padding-bottom: 70px; /* Space for the fixed tabs */
-                position: relative;
-                will-change: transform; /* Optimize for hardware acceleration */
-            }
-            
-            .tab-content {
-                flex: 1;
-                width: 100%;
-                overflow-x: hidden; /* Prevent horizontal overflow */
-                -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-            }
-            
-            .tab-panel {
-                padding: 16px 16px 30px 16px;
-                opacity: 0;
-                transition: opacity 0.25s ease;
-                position: absolute;
-                left: 0;
-                right: 0;
-                top: 0;
-                height: 0;
-                overflow: hidden;
-            }
-            
-            .tab-panel.active {
-                opacity: 1;
-                position: relative;
-                height: auto;
-                overflow: visible;
-            }
-            
-            .mobile-tabs {
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                background-color: rgba(15, 23, 42, 0.95);
-                backdrop-filter: blur(10px);
-                border-top: 1px solid rgba(99, 102, 241, 0.3);
-                padding: 8px 0;
-                z-index: 50;
-                box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
-                display: flex;
-                justify-content: space-around;
-            }
-            
-            .tab-button {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                padding: 8px 0;
-                font-size: 12px;
-                color: #cbd5e1;
-                transition: all 0.2s;
-                width: 100%;
-                cursor: pointer; /* Make sure cursor shows it's clickable */
-            }
-            
-            .tab-button i {
-                font-size: 20px;
-                margin-bottom: 4px;
-            }
-            
-            .tab-button.active {
-                color: #10b981; /* Green for active tab */
-            }
-            
-            /* Hide desktop navigation on mobile */
-            .desktop-nav {
-                display: none;
-            }
-            
-            /* Prevent content jumping on tab change */
-            html, body {
-                scroll-behavior: smooth;
-                height: 100%;
-                margin: 0;
-                overscroll-behavior: none; /* Prevent overscroll effects */
-            }
-        }
-        
-        /* Additional responsive improvements */
-        @media (max-width: 767px) {
-            .mobile-hidden {
-                display: none;
-            }
-            
-            /* Fix sticky navigation layout */
-            .px-6.py-4.bg-gray-900 .max-w-7xl.mx-auto.flex.justify-between.items-center {
-                display: flex;
-                flex-wrap: nowrap;
-                align-items: center;
-            }
-            
-            /* Position the logo at the left */
-            .px-6.py-4.bg-gray-900 .flex.items-center.space-x-2 {
-                flex-shrink: 0;
-            }
-            
-            /* Position the button at the right */
-            .px-6.py-4.bg-gray-900 .flex.space-x-4 {
-                margin-left: auto;
-                flex-shrink: 0;
-            }
-            
-            /* Make the hamburger menu visible and properly positioned */
-            .mobile-menu-toggle {
-                display: block !important;
-                margin-left: 15px;
-                margin-right: 0;
-                padding: 4px;
-            }
-            
-            /* Make sure hamburger button is visible */
-            .md\:hidden.text-2xl.mobile-menu-toggle {
-                display: block !important;
-                margin-left: 15px;
-                z-index: 1001;
-            }
-            
-            /* Minimize padding for better mobile layout */
-            .px-6 {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-            
-            /* Make sure header button is appropriately sized */
-            .px-6.py-4.bg-gray-900 .btn-primary {
-                padding: 8px 12px;
-                font-size: 14px;
-            }
-            
-            /* Fix any wobbling caused by horizontal overflow */
-            html, body {
-                overflow-x: hidden;
-                max-width: 100%;
-            }
-            
-            /* Fix unwanted margin/padding that might cause wobbling */
-            body {
-                margin: 0;
-                padding: 0;
-                position: relative;
-            }
-        }
-        
-        @media (min-width: 768px) {
-            .desktop-hidden {
-                display: none;
-            }
-        }
-        
-        /* Fix for disclaimer modal */
-        #disclaimer-modal {
-            z-index: 9999;
-        }
-        
-        #disclaimer-modal .bg-gray-800 {
+        .nav-link {
+            color: var(--text-medium);
+            font-weight: 500;
+            padding: 0.5rem 0;
             position: relative;
-            z-index: 10000;
         }
         
-        #disclaimer-checkbox {
-            width: 20px;
-            height: 20px;
+        .nav-link:hover {
+            color: var(--dark-green);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--dark-green);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero-text {
+            color: var(--text-medium);
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .hero-image-container {
+            position: relative;
+        }
+        
+        .equity-curve-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-badge {
+            position: absolute;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        
+        .badge-primary {
+            background-color: var(--dark-green);
+            color: white;
+            top: -1.5rem;
+            right: 2rem;
+        }
+        
+        .badge-secondary {
+            background-color: var(--accent-orange);
+            color: white;
+            bottom: -1rem;
+            left: 2rem;
+        }
+        
+        /* SVG Animation Styles */
+        .equity-line {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: draw-line 3s ease forwards;
+        }
+        
+        .area-fill {
+            opacity: 0;
+            animation: fade-in 2s ease forwards 1s;
+        }
+        
+        .profit-point {
+            opacity: 0;
+            animation: fade-in 0.5s ease forwards;
+        }
+        
+        .profit-point:nth-child(1) { animation-delay: 0.5s; }
+        .profit-point:nth-child(2) { animation-delay: 1s; }
+        .profit-point:nth-child(3) { animation-delay: 1.5s; }
+        .profit-point:nth-child(4) { animation-delay: 2s; }
+        .profit-point:nth-child(5) { animation-delay: 2.5s; }
+        .profit-point:nth-child(6) { animation-delay: 3s; }
+        
+        .profit-label {
+            opacity: 0;
+            animation: fade-in 0.5s ease forwards 3s;
+        }
+        
+        .chart-title {
+            opacity: 0;
+            animation: fade-in 1s ease forwards 0.5s;
+        }
+        
+        .grid-line {
+            stroke-dasharray: 5;
+            opacity: 0;
+            animation: fade-in 1s ease forwards, dash-animation 20s linear infinite;
+        }
+        
+        .grid-line:nth-child(1) { animation-delay: 0.2s; }
+        .grid-line:nth-child(2) { animation-delay: 0.4s; }
+        .grid-line:nth-child(3) { animation-delay: 0.6s; }
+        .grid-line:nth-child(4) { animation-delay: 0.8s; }
+        
+        @keyframes draw-line {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+        
+        @keyframes fade-in {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes dash-animation {
+            to {
+                stroke-dashoffset: 100;
+            }
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background-color: var(--dark-green);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .cta-title {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        .cta-text {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        /* Pricing Section */
+        .pricing-card-header {
+            text-align: center;
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #f1f1f1;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .pricing-box {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+        
+        .pricing-label {
+            color: var(--text-medium);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pricing-value {
+            color: var(--dark-green);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        
+        .pricing-detail {
+            color: var(--text-light);
+            font-size: 0.75rem;
+        }
+        
+        .included-list {
+            margin-bottom: 2rem;
+        }
+        
+        .included-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .included-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem 2rem;
+        }
+        
+        .included-item {
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .check-icon {
+            color: var(--light-green);
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+        }
+        
+        .pricing-footer {
+            text-align: center;
+        }
+        
+        .pricing-footer p {
+            color: var(--text-light);
+            font-size: 0.75rem;
+            margin-top: 0.75rem;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: white;
+            padding: 5rem 0 2rem;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-text {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .social-link {
+            color: var(--text-light);
+            font-size: 1.25rem;
+        }
+        
+        .social-link:hover {
+            color: var(--dark-green);
+        }
+        
+        .footer-links-title {
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-link {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-link a {
+            color: var(--text-light);
+        }
+        
+        .footer-link a:hover {
+            color: var(--dark-green);
+        }
+        
+        .footer-form {
+            display: flex;
+        }
+        
+        .footer-input {
+            flex: 1;
+            padding: 0.875rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem 0 0 0.5rem;
+            outline: none;
+        }
+        
+        .footer-input:focus {
+            border-color: var(--dark-green);
+        }
+        
+        .footer-button {
+            background-color: var(--dark-green);
+            color: white;
+            border: none;
+            border-radius: 0 0.5rem 0.5rem 0;
+            padding: 0 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-button:hover {
+            background-color: var(--light-green);
+        }
+        
+        .footer-divider {
+            border-top: 1px solid #e2e8f0;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .footer-copyright {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+        
+        .footer-legal {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .footer-legal-link {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+        
+        .footer-legal-link:hover {
+            color: var(--dark-green);
+        }
+        
+        .notice {
+            background-color: #f8f9fa;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+        
+        .notice-icon {
+            color: var(--dark-green);
+            font-size: 1.25rem;
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+        }
+        
+        .notice-text {
+            color: var(--text-medium);
+            font-size: 0.9375rem;
+            margin-bottom: 0;
+        }
+        
+        .notice-title {
+            color: var(--dark-green);
+            font-weight: 600;
+            display: inline;
+        }
+        
+        /* Mobile Navigation */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--dark-green);
+            font-size: 1.5rem;
             cursor: pointer;
         }
         
-        /* Ensure modal elements are clickable */
-        #disclaimer-modal input,
-        #disclaimer-modal button,
-        #disclaimer-modal label {
-            pointer-events: auto;
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            border-radius: 50px;
+            padding: 0.75rem 1.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            width: 90%;
+            max-width: 400px;
+        }
+        
+        .mobile-nav-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+        }
+        
+        .mobile-nav-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 0.5rem;
+            color: var(--text-light);
+            font-size: 0.75rem;
+            transition: all 0.2s ease;
+        }
+        
+        .mobile-nav-link.active {
+            color: var(--dark-green);
+        }
+        
+        .mobile-nav-icon {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+        
+        .mt-4 {
+            margin-top: 1rem;
+        }
+        
+        .mt-8 {
+            margin-top: 2rem;
+        }
+        
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+        
+        .mb-8 {
+            margin-bottom: 2rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.75rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            /* Layout */
+            .section {
+                padding: 3rem 0;
+            }
+            
+            /* Navigation */
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .mobile-nav {
+                display: block;
+            }
+            
+            /* Hero Section */
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 2.25rem;
+            }
+            
+            .hero-text {
+                font-size: 1.125rem;
+            }
+            
+            /* CTA Section */
+            .cta-title {
+                font-size: 2.25rem;
+            }
+            
+            .cta-text {
+                font-size: 1.125rem;
+            }
+            
+            /* Buttons */
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+            
+            /* Pricing Section */
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .included-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Footer */
+            .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .footer-legal {
+                flex-direction: column;
+                gap: 1rem;
+            }
         }
     </style>
 </head>
-<body class="gradient-bg text-gray-100 min-h-screen">
-    <!-- Desktop View -->
-    <div class="desktop-view">
-        <!-- Navigation -->
-        <nav class="px-6 py-4 bg-gray-900 bg-opacity-80 backdrop-filter backdrop-blur-md border-b border-indigo-900 sticky top-0 z-50">
-            <div class="max-w-7xl mx-auto flex justify-between items-center">
-                <div class="flex items-center space-x-2">
-                    <i class="fas fa-chart-line text-indigo-500 text-2xl"></i>
-                    <span class="text-xl font-bold">CryptoTrend Alpha</span>
-                </div>
-                <div class="hidden md:flex space-x-8 desktop-nav">
-                    <a href="#how-it-works" class="hover:text-indigo-400 transition">How It Works</a>
-                    <a href="#performance" class="hover:text-indigo-400 transition">Performance</a>
-                    <a href="#benefits" class="hover:text-indigo-400 transition">Benefits</a>
-                    <a href="#pricing" class="hover:text-indigo-400 transition">Pricing</a>
-                    <a href="#faq" class="hover:text-indigo-400 transition">FAQ</a>
-                </div>
-                <div class="flex space-x-4">
-                    <select class="bg-gray-800 border border-indigo-900 rounded px-2 py-1 text-sm">
-                        <option value="en">English</option>
-                        <option value="hi">हिन्दी</option>
-                        <option value="ta">தமிழ்</option>
-                        <option value="te">తెలుగు</option>
-                    </select>
-                    <a href="#signup" class="btn-primary px-4 py-2 rounded-lg shadow-md transition">
-                        Start Now
-                    </a>
-                </div>
-                <button class="md:hidden text-2xl mobile-menu-toggle">
-                    <i class="fas fa-bars"></i>
-                </button>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container nav-container">
+            <div class="logo">
+                <span>Crypto</span>Trend Alpha
             </div>
-        </nav>
-        <!-- Hero Section -->
-        <section class="py-20 px-6 tab-home-bg">
-            <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-12 md:mb-0">
-                    <h1 class="text-4xl md:text-6xl font-bold mb-6">
-                        Automated Crypto Trading in <span class="highlight-text">Just 5 Minutes Daily</span>
+            
+            <nav class="nav-links">
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#performance" class="nav-link">Performance</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+            </nav>
+            
+            <a href="#signup" class="btn btn-primary">Start Free Trial</a>
+            
+            <button class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Hero Section with Animated Equity Curve -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div>
+                    <h1 class="hero-title serif-heading">
+                        Automated Crypto Trading in <span style="color: var(--dark-green);">5 Minutes</span> Daily
                     </h1>
-                    <p class="text-xl text-gray-300 mb-8">
+                    <p class="hero-text">
                         Our proprietary algorithm delivers 40% annualized returns while saving you hours of screen time and emotional stress.
                     </p>
-                    <p class="text-md text-gray-400 mb-6">
-                        <i class="fas fa-info-circle mr-2 text-yellow-400"></i>
-                        Past performance is not indicative of future results. Cryptocurrency trading involves risk.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="#signup" class="btn-primary px-6 py-3 rounded-lg shadow-md text-center font-medium transition">
+                    <div class="hero-buttons">
+                        <a href="#signup" class="btn btn-primary">
                             Start Your 14-Day Trial
                         </a>
-                        <a href="#how-it-works" class="border border-indigo-600 hover:bg-indigo-900 px-6 py-3 rounded-lg text-center font-medium transition">
+                        <a href="#how-it-works" class="btn btn-secondary">
                             See How It Works
                         </a>
                     </div>
                 </div>
-                <div class="md:w-1/2">
-                    <div class="relative">
-                        <div class="absolute inset-0 bg-indigo-500 bg-opacity-20 rounded-lg filter blur-xl"></div>
-                        <img src="/api/placeholder/800/600" alt="Trading dashboard with clear buy/sell signals" class="relative rounded-lg shadow-2xl">
+                
+                <div class="hero-image-container">
+                    <div class="hero-badge badge-primary">5 Minutes Daily</div>
+                    <div class="hero-badge badge-secondary">40% Annual Return</div>
+                    
+                    <div class="equity-curve-container">
+                        <!-- Animated Equity Curve SVG -->
+                        <svg width="100%" height="350" viewBox="0 0 600 350" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Title and Labels -->
+                            <text x="300" y="30" text-anchor="middle" class="chart-title" font-family="Poppins" font-size="16" font-weight="600" fill="#1a2b2a">Portfolio Growth (40% Annual Return)</text>
+                            
+                            <!-- Grid Lines -->
+                            <line x1="50" y1="50" x2="550" y2="50" stroke="#e2e8f0" stroke-width="1" class="grid-line" />
+                            <line x1="50" y1="125" x2="550" y2="125" stroke="#e2e8f0" stroke-width="1" class="grid-line" />
+                            <line x1="50" y1="200" x2="550" y2="200" stroke="#e2e8f0" stroke-width="1" class="grid-line" />
+                            <line x1="50" y1="275" x2="550" y2="275" stroke="#e2e8f0" stroke-width="1" class="grid-line" />
+                            
+                            <!-- Y-axis labels -->
+                            <text x="45" y="50" text-anchor="end" font-family="Poppins" font-size="12" fill="#637776">₹400K</text>
+                            <text x="45" y="125" text-anchor="end" font-family="Poppins" font-size="12" fill="#637776">₹300K</text>
+                            <text x="45" y="200" text-anchor="end" font-family="Poppins" font-size="12" fill="#637776">₹200K</text>
+                            <text x="45" y="275" text-anchor="end" font-family="Poppins" font-size="12" fill="#637776">₹100K</text>
+                            
+                            <!-- X-axis labels (Months) -->
+                            <text x="80" y="295" text-anchor="middle" font-family="Poppins" font-size="12" fill="#637776">Jan</text>
+                            <text x="175" y="295" text-anchor="middle" font-family="Poppins" font-size="12" fill="#637776">Mar</text>
+                            <text x="270" y="295" text-anchor="middle" font-family="Poppins" font-size="12" fill="#637776">May</text>
+                            <text x="365" y="295" text-anchor="middle" font-family="Poppins" font-size="12" fill="#637776">Jul</text>
+                            <text x="460" y="295" text-anchor="middle" font-family="Poppins" font-size="12" fill="#637776">Sep</text>
+                            <text x="555" y="295" text-anchor="middle" font-family="Poppins" font-size="12" fill="#637776">Nov</text>
+                            
+                            <!-- Equity Curve Line and Area -->
+                            <path d="M80,275 C90,270 120,240 175,230 C230,220 250,225 270,215 C290,205 320,195 365,180 C410,165 430,135 460,130 C490,125 520,90 555,70" 
+                                  fill="none" 
+                                  stroke="#2ca793" 
+                                  stroke-width="3"
+                                  class="equity-line" />
+                            
+                            <path d="M80,275 C90,270 120,240 175,230 C230,220 250,225 270,215 C290,205 320,195 365,180 C410,165 430,135 460,130 C490,125 520,90 555,70 L555,275 L80,275 Z" 
+                                  fill="url(#gradient)" 
+                                  fill-opacity="0.2" 
+                                  class="area-fill" />
+                            
+                            <!-- Gradient for the area fill -->
+                            <defs>
+                                <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" stop-color="#2ca793" stop-opacity="0.6" />
+                                    <stop offset="100%" stop-color="#2ca793" stop-opacity="0.1" />
+                                </linearGradient>
+                            </defs>
+                            
+                            <!-- Data Points -->
+                            <circle cx="80" cy="275" r="6" fill="#2ca793" class="profit-point" />
+                            <circle cx="175" cy="230" r="6" fill="#2ca793" class="profit-point" />
+                            <circle cx="270" cy="215" r="6" fill="#2ca793" class="profit-point" />
+                            <circle cx="365" cy="180" r="6" fill="#2ca793" class="profit-point" />
+                            <circle cx="460" cy="130" r="6" fill="#2ca793" class="profit-point" />
+                            <circle cx="555" cy="70" r="6" fill="#2ca793" class="profit-point" />
+                            
+                            <!-- Final Return Label -->
+                            <rect x="500" y="45" width="60" height="30" rx="5" fill="#124947" class="profit-label" />
+                            <text x="530" y="65" text-anchor="middle" font-family="Poppins" font-size="12" font-weight="600" fill="white" class="profit-label">+40%</text>
+                            
+                            <!-- Initial Investment Label -->
+                            <rect x="50" y="275" width="60" height="30" rx="5" fill="#f3704b" class="profit-label" />
+                            <text x="80" y="295" text-anchor="middle" font-family="Poppins" font-size="12" font-weight="600" fill="white" class="profit-label">Start</text>
+                        </svg>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Key Stats -->
-        <section class="py-12 px-6 bg-gray-900">
-            <div class="max-w-7xl mx-auto">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <div class="stat-card flex flex-col items-center p-6 rounded-lg bg-gray-800 bg-opacity-60">
-                        <span class="text-4xl font-bold text-indigo-400">5 min</span>
-                        <span class="text-sm text-gray-400">Daily Time Required</span>
-                    </div>
-                    <div class="stat-card flex flex-col items-center p-6 rounded-lg bg-gray-800 bg-opacity-60">
-                        <span class="text-4xl font-bold text-green-500">40%</span>
-                        <span class="text-sm text-gray-400">Annual Return</span>
-                    </div>
-                    <div class="stat-card flex flex-col items-center p-6 rounded-lg bg-gray-800 bg-opacity-60">
-                        <span class="text-4xl font-bold text-orange-500">74%</span>
-                        <span class="text-sm text-gray-400">Win Rate</span>
-                    </div>
-                    <div class="stat-card flex flex-col items-center p-6 rounded-lg bg-gray-800 bg-opacity-60">
-                        <span class="text-4xl font-bold text-red-500">12%</span>
-                        <span class="text-sm text-gray-400">Max Drawdown</span>
-                    </div>
+        </div>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">5 min</div>
+                    <div class="stat-label">Daily Time Required</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">40%</div>
+                    <div class="stat-label">Annual Return</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">74%</div>
+                    <div class="stat-label">Win Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">12%</div>
+                    <div class="stat-label">Max Drawdown</div>
                 </div>
             </div>
-        </section>
-        <!-- How It Works -->
-        <section id="how-it-works" class="py-20 px-6 tab-how-bg">
-            <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl font-bold mb-4">How CryptoTrend Alpha Works</h2>
-                    <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-                        A simple, three-step process that takes just 5 minutes of your day
+        </div>
+    </section>
+    
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="serif-heading text-4xl">How It Works</h2>
+                <p class="text-center text-lg text-text-medium mt-4 max-w-3xl mx-auto">
+                    A simple, three-step process that takes just 5 minutes of your day
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold">Receive Daily Signals</h3>
+                    <p class="text-text-medium">
+                        Each morning, receive clear trading signals based on our proprietary algorithm that analyzes market trends across multiple timeframes.
                     </p>
                 </div>
                 
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="feature-card p-6 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900 transition duration-300">
-                        <div class="w-14 h-14 mb-6 flex items-center justify-center rounded-full bg-indigo-900 text-indigo-300">
-                            <i class="fas fa-bell text-2xl"></i>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold">Review & Approve</h3>
+                    <p class="text-text-medium">
+                        Simply review the recommended trades in your dashboard—clear buy, sell, or hold signals for each asset in your portfolio.
+                    </p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold">Execute & Relax</h3>
+                    <p class="text-text-medium">
+                        Execute the trades with one click and go about your day. Our algorithm continuously monitors the market so you don't have to.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center">
+                <div class="card inline-block mx-auto py-6 px-10">
+                    <h3 class="text-xl font-bold mb-2">Total Trading Time: <span style="color: var(--dark-green);">5 Minutes</span></h3>
+                    <p class="text-text-medium mb-0">The rest of your day is yours</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Benefits Section -->
+    <section class="section bg-white">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="serif-heading text-4xl">What You're No Longer Doing</h2>
+                <p class="text-center text-lg text-text-medium mt-4 max-w-3xl mx-auto">
+                    Focus on what matters, automate the rest
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-tv feature-icon"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3 class="text-xl font-semibold mb-3">No More Endless Screen Time</h3>
+                        <p class="text-text-medium mb-0">
+                            Say goodbye to 8+ hours of staring at charts and constantly checking price movements.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-brain feature-icon"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3 class="text-xl font-semibold mb-3">No More Emotional Trading</h3>
+                        <p class="text-text-medium mb-0">
+                            Eliminate fear and greed from your trading decisions with algorithm-driven signals.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-chart-line feature-icon"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3 class="text-xl font-semibold mb-3">No More Analysis Paralysis</h3>
+                        <p class="text-text-medium mb-0">
+                            Skip the confusion of conflicting indicators and complex chart patterns.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Performance Section -->
+    <section id="performance" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="serif-heading text-4xl">Verified Performance</h2>
+                <p class="text-center text-lg text-text-medium mt-4 max-w-3xl mx-auto">
+                    Our algorithm has been backtested across multiple market cycles with consistent results.
+                </p>
+            </div>
+            
+            <div class="card mb-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-semibold mb-0">Performance History</h3>
+                    <div class="flex gap-1">
+                        <button class="px-4 py-2 rounded-md text-sm border border-gray-200 text-text-medium hover:bg-gray-50">1M</button>
+                        <button class="px-4 py-2 rounded-md text-sm border border-gray-200 text-text-medium hover:bg-gray-50">3M</button>
+                        <button class="px-4 py-2 rounded-md text-sm bg-dark-green text-white">1Y</button>
+                        <button class="px-4 py-2 rounded-md text-sm border border-gray-200 text-text-medium hover:bg-gray-50">All</button>
+                    </div>
+                </div>
+                <img src="/api/placeholder/900/400" alt="Performance chart showing 40% annualized returns" class="w-full rounded-lg">
+                <p class="text-xs text-text-light italic mt-4 mb-0">
+                    Past performance is not indicative of future results. Chart shows backtested performance.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="card text-center">
+                    <div class="text-sm font-medium text-text-medium mb-1">Best Month</div>
+                    <div class="text-3xl font-bold text-accent-orange mb-1">+14.0%</div>
+                    <div class="text-sm text-text-light mb-0">February 2024</div>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="text-sm font-medium text-text-medium mb-1">Average Monthly</div>
+                    <div class="text-3xl font-bold text-dark-green mb-1">+3.3%</div>
+                    <div class="text-sm text-text-light mb-0">Across all market conditions</div>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="text-sm font-medium text-text-medium mb-1">Recovery Time</div>
+                    <div class="text-3xl font-bold text-light-green mb-1">2.4 Months</div>
+                    <div class="text-sm text-text-light mb-0">Average time to new equity high</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Section - Now Fixed -->
+    <section id="pricing" class="section bg-white">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="serif-heading text-4xl">Performance-Based Pricing</h2>
+                <p class="text-center text-lg text-text-medium mt-4 max-w-3xl mx-auto">
+                    We only succeed when you succeed
+                </p>
+            </div>
+            
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="card">
+                    <div class="pricing-card-header">
+                        <h3 style="font-size: 1.75rem;">One Simple Plan for Everyone</h3>
+                        <p style="color: var(--text-medium);">Same great features for traders of all levels</p>
+                    </div>
+                    
+                    <div class="pricing-grid">
+                        <div class="pricing-box">
+                            <div class="pricing-label">Monthly Subscription</div>
+                            <div class="pricing-value">₹1,500</div>
+                            <div class="pricing-detail">Billed monthly</div>
                         </div>
-                        <h3 class="text-xl font-semibold mb-3">1. Receive Daily Signals</h3>
-                        <p class="text-gray-400">
-                            Each morning, receive clear trading signals based on our proprietary algorithm that analyzes market trends across multiple timeframes.
+                        
+                        <div class="pricing-box">
+                            <div class="pricing-label">Performance Fee</div>
+                            <div class="pricing-value">20%</div>
+                            <div class="pricing-detail">of new profits only</div>
+                        </div>
+                    </div>
+                    
+                    <div class="included-list">
+                        <h4 class="included-title">What's Included:</h4>
+                        <div class="included-grid">
+                            <div class="included-item">
+                                <i class="fas fa-check check-icon"></i>
+                                <span>All major crypto pairs</span>
+                            </div>
+                            <div class="included-item">
+                                <i class="fas fa-check check-icon"></i>
+                                <span>Daily trade signals</span>
+                            </div>
+                            <div class="included-item">
+                                <i class="fas fa-check check-icon"></i>
+                                <span>Automated execution</span>
+                            </div>
+                            <div class="included-item">
+                                <i class="fas fa-check check-icon"></i>
+                                <span>Risk management tools</span>
+                            </div>
+                            <div class="included-item">
+                                <i class="fas fa-check check-icon"></i>
+                                <span>Performance dashboard</span>
+                            </div>
+                            <div class="included-item">
+                                <i class="fas fa-check check-icon"></i>
+                                <span>Mobile notifications</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="notice mb-6">
+                        <i class="fas fa-info-circle notice-icon"></i>
+                        <p class="notice-text mb-0">
+                            <span class="notice-title">High Watermark Policy:</span> Performance fees are only charged on profits that exceed your previous highest portfolio value. This ensures you never pay performance fees twice on the same gains.
                         </p>
                     </div>
                     
-                    <div class="feature-card p-6 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900 transition duration-300">
-                        <div class="w-14 h-14 mb-6 flex items-center justify-center rounded-full bg-indigo-900 text-indigo-300">
-                            <i class="fas fa-check-circle text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-3">2. Review & Approve</h3>
-                        <p class="text-gray-400">
-                            Simply review the recommended trades in your dashboard—clear buy, sell, or hold signals for each asset in your portfolio.
-                        </p>
-                    </div>
-                    
-                    <div class="feature-card p-6 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900 transition duration-300">
-                        <div class="w-14 h-14 mb-6 flex items-center justify-center rounded-full bg-indigo-900 text-indigo-300">
-                            <i class="fas fa-rocket text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-3">3. Execute & Relax</h3>
-                        <p class="text-gray-400">
-                            Execute the trades with one click and go about your day. Our algorithm continuously monitors the market so you don't have to.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="mt-16 flex justify-center">
-                    <a href="#signup" class="flex items-center space-x-2 text-indigo-400 hover:text-indigo-300 transition">
-                        <span>Try it yourself with our 14-day trial</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </section>
-        <!-- Performance Section -->
-        <section id="performance" class="py-20 px-6 tab-performance-bg">
-            <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl font-bold mb-4">Verified Performance</h2>
-                    <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-                        Our algorithm has been backtested across multiple market cycles with consistent results.
-                    </p>
-                </div>
-
-                <!-- Performance Chart -->
-                <div class="bg-gray-800 p-8 rounded-xl border border-indigo-900 shadow-xl" id="backtest-results">
-                    <img src="/api/placeholder/1200/800" alt="Backtest performance chart showing 40% annualized returns" class="w-full rounded-lg">
-                </div>
-
-                <div class="grid md:grid-cols-3 gap-6 mt-12">
-                    <div class="p-6 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900">
-                        <h3 class="text-xl font-semibold mb-3 text-green-500">Best Month</h3>
-                        <p class="text-3xl font-bold mb-1">+14.0%</p>
-                        <p class="text-gray-400">February 2024</p>
-                    </div>
-                    
-                    <div class="p-6 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900">
-                        <h3 class="text-xl font-semibold mb-3 text-orange-500">Average Monthly</h3>
-                        <p class="text-3xl font-bold mb-1">+3.3%</p>
-                        <p class="text-gray-400">Across all market conditions</p>
-                    </div>
-                    
-                    <div class="p-6 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900">
-                        <h3 class="text-xl font-semibold mb-3 text-indigo-400">Recovery Time</h3>
-                        <p class="text-3xl font-bold mb-1">2.4 Months</p>
-                        <p class="text-gray-400">Average time to new equity high</p>
-                    </div>
-                </div>
-                
-                <!-- Performance Disclaimer -->
-                <div class="bg-gray-800 bg-opacity-60 rounded-lg p-4 mt-6 border border-indigo-900 text-sm text-gray-400">
-                    <p class="flex items-start">
-                        <i class="fas fa-exclamation-circle text-yellow-500 mt-1 mr-2"></i>
-                        <span>
-                            <strong class="text-gray-300">Performance Disclaimer:</strong> The performance data shown represents backtested results based on historical data. Backtested performance is not an indicator of future results. Actual trading results may vary significantly from backtested performance due to market factors, technical issues, and other variables. The 40% annualized return figure represents the average return of our backtested model from 2020-2024 and is not a guarantee of future performance.
-                        </span>
-                    </p>
-                </div>
-            </div>
-        </section>
-        <!-- Trading Reimagined / Day in the Life Section -->
-        <section id="benefits" class="py-20 px-6 relative tab-how-bg">
-            <div class="max-w-7xl mx-auto relative">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl font-bold mb-4">A Day in the Life with CryptoTrend Alpha</h2>
-                    <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-                        Focus on what matters, automate the rest
-                    </p>
-                </div>
-                
-                <!-- Timeline visualization with simplified icons -->
-                <div class="relative py-10 mb-16">
-                    <!-- Timeline base -->
-                    <div class="absolute left-0 right-0 h-2 bg-blue-500 top-1/2 transform -translate-y-1/2"></div>
-                    
-                    <!-- Step 1 -->
-                    <div class="flex items-start justify-between mb-20">
-                        <div class="w-1/4 text-center relative">
-                            <div class="w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center mx-auto mb-4 relative z-10">
-                                <span class="text-white text-2xl font-bold">1</span>
-                            </div>
-                            <div class="bg-gray-800 rounded-xl p-4 shadow-lg mb-4 h-36 flex flex-col items-center justify-center">
-                                <div class="text-green-500 font-bold mb-2">SIGNAL READY</div>
-                                <div class="text-sm text-gray-300">Tap to view today's trades</div>
-                            </div>
-                            <h3 class="font-bold text-xl mb-1">Morning Signal</h3>
-                            <p class="text-gray-400">9:00 AM</p>
-                            <p class="text-sm text-gray-400 mt-2">Daily trade signals ready for review</p>
-                        </div>
-                        
-                        <!-- Step 2 -->
-                        <div class="w-1/4 text-center relative">
-                            <div class="w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center mx-auto mb-4 relative z-10">
-                                <span class="text-white text-2xl font-bold">2</span>
-                            </div>
-                            <div class="bg-gray-800 rounded-xl p-4 shadow-lg mb-4 h-36 flex flex-col items-center justify-center">
-                                <div class="w-full h-4 bg-gray-700 rounded mb-2"></div>
-                                <div class="w-1/3 h-3 bg-green-500 rounded-full self-start ml-2 mb-2"></div>
-                                <div class="w-2/3 h-3 bg-red-500 rounded-full self-end mr-2"></div>
-                            </div>
-                            <h3 class="font-bold text-xl mb-1">Review Dashboard</h3>
-                            <p class="text-gray-400">9:01 AM</p>
-                            <p class="text-sm text-gray-400 mt-2">Clear BUY/SELL/HOLD signals for each asset</p>
-                        </div>
-                        
-                        <!-- Step 3 -->
-                        <div class="w-1/4 text-center relative">
-                            <div class="w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center mx-auto mb-4 relative z-10">
-                                <span class="text-white text-2xl font-bold">3</span>
-                            </div>
-                            <div class="bg-gray-800 rounded-xl p-4 shadow-lg mb-4 h-36 flex flex-col items-center justify-center">
-                                <div class="text-white mb-2">BUY BTC</div>
-                                <div class="bg-green-500 text-white px-4 py-2 rounded">EXECUTE</div>
-                            </div>
-                            <h3 class="font-bold text-xl mb-1">Execute Trades</h3>
-                            <p class="text-gray-400">9:03 AM</p>
-                            <p class="text-sm text-gray-400 mt-2">One-click execution of recommended trades</p>
-                        </div>
-                        
-                        <!-- Step 4 -->
-                        <div class="w-1/4 text-center relative">
-                            <div class="w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center mx-auto mb-4 relative z-10">
-                                <span class="text-white text-2xl font-bold">4</span>
-                            </div>
-                            <div class="bg-gray-800 rounded-xl p-4 shadow-lg mb-4 h-36 flex flex-col items-center justify-center">
-                                <div class="w-16 h-16 rounded-full border-2 border-green-500 flex items-center justify-center">
-                                    <i class="fas fa-smile text-green-500 text-2xl"></i>
-                                </div>
-                            </div>
-                            <h3 class="font-bold text-xl mb-1">Enjoy Your Day</h3>
-                            <p class="text-gray-400">9:05 AM</p>
-                            <p class="text-sm text-gray-400 mt-2">Algorithm handles monitoring while you focus on what matters</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Total Time Indicator -->
-                    <div class="bg-gray-800 border border-blue-500 rounded-lg p-4 max-w-md mx-auto text-center">
-                        <h3 class="text-xl font-bold mb-1">Total Trading Time: 5 Minutes</h3>
-                        <p class="text-gray-400">The rest of your day is yours</p>
-                    </div>
-                </div>
-                
-                <!-- What You're No Longer Doing Section -->
-                <div class="bg-gray-800 bg-opacity-80 rounded-xl p-8 mb-16">
-                    <h3 class="text-2xl font-bold mb-8 text-center">What You're No Longer Doing</h3>
-                    
-                    <div class="grid md:grid-cols-3 gap-8">
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 rounded-full bg-red-900 bg-opacity-30 flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-tv text-red-400 text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg mb-2">No More Endless Screen Time</h4>
-                                <p class="text-gray-300">Say goodbye to 8+ hours of staring at charts and constantly checking price movements.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 rounded-full bg-red-900 bg-opacity-30 flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-brain text-red-400 text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg mb-2">No More Emotional Trading</h4>
-                                <p class="text-gray-300">Eliminate fear and greed from your trading decisions with algorithm-driven signals.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 rounded-full bg-red-900 bg-opacity-30 flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-chart-line text-red-400 text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg mb-2">No More Analysis Paralysis</h4>
-                                <p class="text-gray-300">Skip the confusion of conflicting indicators and complex chart patterns.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Pricing -->
-        <section id="pricing" class="py-20 px-6 tab-pricing-bg">
-            <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl font-bold mb-4">Performance-Based Pricing</h2>
-                    <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-                        We only succeed when you succeed
-                    </p>
-                </div>
-                
-                <!-- Simple Pricing Box -->
-                <div class="bg-indigo-900 bg-opacity-40 rounded-xl border border-indigo-500 p-8 shadow-xl">
-                    <div class="text-center">
-                        <h3 class="text-2xl md:text-3xl font-bold mb-3">One Simple Plan for Everyone</h3>
-                        <p class="text-lg text-gray-300 mb-8">Same great features for traders of all levels</p>
-                        
-                        <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8 mb-8">
-                            <div class="text-center">
-                                <p class="text-gray-400 text-sm">Monthly Subscription</p>
-                                <p class="text-4xl font-bold">₹1,500</p>
-                            </div>
-                            <div class="text-4xl font-bold text-gray-400">+</div>
-                            <div class="text-center">
-                                <p class="text-gray-400 text-sm">Performance Fee</p>
-                                <p class="text-4xl font-bold">20%</p>
-                                <p class="text-sm text-gray-400">of new profits only</p>
-                            </div>
-                        </div>
-                        
-                        <a href="#signup" class="inline-block btn-primary px-8 py-3 rounded-lg shadow-md font-medium text-lg transition">
+                    <div class="pricing-footer">
+                        <a href="#signup" class="btn btn-primary">
                             Start Your 14-Day Trial
+                        </a>
+                        <p>
+                            Recommended starting amount: ₹2,00,000
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section id="faq" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="serif-heading text-4xl">Frequently Asked Questions</h2>
+                <p class="text-center text-lg text-text-medium mt-4 max-w-3xl mx-auto">
+                    Everything you need to know before getting started
+                </p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto space-y-4">
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3">How much time will I need to spend daily?</h3>
+                    <p class="text-text-medium mb-0">
+                        Just 5 minutes a day. Our algorithm does all the heavy lifting, analyzing market trends and generating clear signals. You simply log in, review the recommended trades, and execute them with a click.
+                    </p>
+                </div>
+                
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3">What exchanges are supported?</h3>
+                    <p class="text-text-medium mb-0">
+                        We currently support Binance, WazirX, CoinDCX, and Zebpay. We're constantly working to add more exchanges based on user demand.
+                    </p>
+                </div>
+                
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3">How much capital do I need to start?</h3>
+                    <p class="text-text-medium mb-0">
+                        We recommend starting with at least ₹2,00,000 to achieve optimal results, but you can begin with as little as ₹50,000. The algorithm scales effectively with larger capital amounts.
+                    </p>
+                </div>
+                
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3">How does your performance fee work?</h3>
+                    <p class="text-text-medium mb-0">
+                        We charge a 20% performance fee only on profits that exceed your portfolio's previous highest value (high watermark). This ensures you only pay for new profits and never pay fees twice on the same gains if your portfolio fluctuates.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title serif-heading">Start Trading in 5 Minutes a Day</h2>
+            <p class="cta-text">
+                Join thousands of Indian traders who are reclaiming their time while achieving consistent returns.
+            </p>
+            <div class="cta-buttons">
+                <a href="#signup" class="btn btn-primary">Start Your 14-Day Trial</a>
+                <a href="#how-it-works" class="btn btn-outline-white">See How It Works</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3 class="footer-title">
+                        <span style="color: var(--light-green);">Crypto</span>Trend Alpha
+                    </h3>
+                    <p class="footer-text">
+                        Automated crypto trading in just 5 minutes a day with consistent returns in volatile markets.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-youtube"></i>
                         </a>
                     </div>
                 </div>
                 
-                <!-- Investment Disclaimer -->
-                <div class="bg-gray-800 bg-opacity-60 rounded-lg p-4 mt-8 border border-indigo-900 text-sm text-gray-400">
-                    <p class="flex items-start">
-                        <i class="fas fa-info-circle text-indigo-400 mt-1 mr-2"></i>
-                        <span>
-                            <strong class="text-gray-300">Investment Disclosure:</strong> Your capital is at risk. Investments in cryptocurrency may fluctuate in value and you may lose the amount invested. Past performance is not indicative of future results. CryptoTrend Alpha does not hold or have access to your funds; all trading is executed through your own exchange accounts.
-                        </span>
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- FAQ -->
-        <section id="faq" class="py-20 px-6 tab-home-bg">
-            <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
-                    <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-                        Everything you need to know before getting started
-                    </p>
+                <div>
+                    <h4 class="footer-links-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#how-it-works">How It Works</a></li>
+                        <li class="footer-link"><a href="#performance">Performance</a></li>
+                        <li class="footer-link"><a href="#benefits">Benefits</a></li>
+                        <li class="footer-link"><a href="#pricing">Pricing</a></li>
+                        <li class="footer-link"><a href="#faq">FAQ</a></li>
+                    </ul>
                 </div>
                 
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="p-6 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900">
-                        <h3 class="text-xl font-semibold mb-3">How much time will I need to spend daily?</h3>
-                        <p class="text-gray-300">
-                            Just 5 minutes a day. Our algorithm does all the heavy lifting, analyzing market trends and generating clear signals. You simply log in, review the recommended trades, and execute them with a click.
-                        </p>
-                    </div>
-                    
-                    <div class="p-6 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900">
-                        <h3 class="text-xl font-semibold mb-3">What exchanges are supported?</h3>
-                        <p class="text-gray-300">
-                            We currently support Binance, WazirX, CoinDCX, and Zebpay. We're constantly working to add more exchanges based on user demand.
-                        </p>
-                    </div>
-                    
-                    <div class="p-6 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900">
-                        <h3 class="text-xl font-semibold mb-3">How much capital do I need to start?</h3>
-                        <p class="text-gray-300">
-                            We recommend starting with at least ₹2,00,000 to achieve optimal results, but you can begin with as little as ₹50,000. The algorithm scales effectively with larger capital amounts.
-                        </p>
-                    </div>
-                    
-                    <div class="p-6 rounded-xl bg-gray-800 bg-opacity-60 border border-indigo-900">
-                        <h3 class="text-xl font-semibold mb-3">Is this legal in India?</h3>
-                        <p class="text-gray-300">
-                            Yes, crypto trading is legal in India. Our algorithm simply automates your trading strategy and executes trades on your behalf. You maintain complete control over your accounts and funds.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Sign Up Section -->
-        <section id="signup" class="py-20 px-6 bg-indigo-900 bg-opacity-40">
-            <div class="max-w-7xl mx-auto">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div>
-                        <h2 class="text-3xl font-bold mb-6">Start Trading in 5 Minutes a Day</h2>
-                        <p class="text-xl text-gray-300 mb-8">
-                            Join thousands of Indian traders who are reclaiming their time while achieving consistent returns.
-                        </p>
-                        <ul class="space-y-4 mb-8">
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                                <span>14-day money-back guarantee, no questions asked</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                                <span>Quick setup process (under 15 minutes)</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                                <span>No prior trading experience required</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                                <span>Secure encryption for all your data</span>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div class="bg-gray-800 p-8 rounded-xl border border-indigo-900 shadow-xl">
-                        <!-- Investment Disclaimer -->
-                        <div class="bg-gray-800 bg-opacity-60 rounded-lg p-4 mb-6 border border-indigo-900 text-sm text-gray-400">
-                            <p class="flex items-start">
-                                <i class="fas fa-info-circle text-indigo-400 mt-1 mr-2"></i>
-                                <span>
-                                    <strong class="text-gray-300">Investment Disclosure:</strong> Your capital is at risk. Investments in cryptocurrency may fluctuate in value and you may lose the amount invested. Past performance is not indicative of future results. CryptoTrend Alpha does not hold or have access to your funds; all trading is executed through your own exchange accounts. The subscription fee of ₹1,500 and 20% performance fee on profits will be charged as described in our terms of service.
-                                </span>
-                            </p>
-                        </div>
-                        
-                        <h3 class="text-2xl font-semibold mb-6">Create Your Account</h3>
-                        <form>
-                            <div class="mb-4">
-                                <label class="block text-gray-300 mb-2" for="name">Full Name</label>
-                                <input type="text" id="name" class="w-full bg-gray-900 border border-indigo-800 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                            </div>
-                            
-                            <div class="mb-4">
-                                <label class="block text-gray-300 mb-2" for="email">Email Address</label>
-                                <input type="email" id="email" class="w-full bg-gray-900 border border-indigo-800 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                            </div>
-                            
-                            <div class="mb-4">
-                                <label class="block text-gray-300 mb-2" for="phone">Phone Number</label>
-                                <input type="tel" id="phone" class="w-full bg-gray-900 border border-indigo-800 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                            </div>
-                            
-                            <div class="mb-6">
-                                <label class="block text-gray-300 mb-2" for="investment">Initial Investment Amount</label>
-                                <select id="investment" class="w-full bg-gray-900 border border-indigo-800 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                                    <option value="">Select Amount</option>
-                                    <option value="50000">₹50,000 - ₹1,00,000</option>
-                                    <option value="100000">₹1,00,000 - ₹2,00,000</option>
-                                    <option value="200000">₹2,00,000 - ₹5,00,000</option>
-                                    <option value="500000">₹5,00,000 - ₹10,00,000</option>
-                                    <option value="1000000">₹10,00,000+</option>
-                                </select>
-                            </div>
-                            
-                            <button type="submit" class="w-full btn-secondary py-3 rounded-lg text-center font-medium transition">
-                                Start Your 14-Day Trial
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer Section -->
-        <footer class="bg-gray-900 bg-opacity-80 border-t border-indigo-900 mt-16 py-8 px-6">
-            <div class="max-w-7xl mx-auto">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <div>
-                        <div class="flex items-center space-x-2 mb-4">
-                            <i class="fas fa-chart-line text-indigo-500 text-2xl"></i>
-                            <span class="text-xl font-bold">CryptoTrend Alpha</span>
-                        </div>
-                        <p class="text-gray-400 mb-4">
-                            Automated crypto trading in just 5 minutes a day with consistent returns in volatile markets.
-                        </p>
-                        <div class="flex space-x-4">
-                            <a href="#" class="text-gray-400 hover:text-indigo-400 transition">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="text-gray-400 hover:text-indigo-400 transition">
-                                <i class="fab fa-telegram"></i>
-                            </a>
-                            <a href="#" class="text-gray-400 hover:text-indigo-400 transition">
-                                <i class="fab fa-discord"></i>
-                            </a>
-                            <a href="#" class="text-gray-400 hover:text-indigo-400 transition">
-                                <i class="fab fa-youtube"></i>
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <h3 class="font-semibold mb-4">Quick Links</h3>
-                        <ul class="space-y-2">
-                            <li><a href="#how-it-works" class="text-gray-400 hover:text-indigo-400 transition">How It Works</a></li>
-                            <li><a href="#performance" class="text-gray-400 hover:text-indigo-400 transition">Performance</a></li>
-                            <li><a href="#benefits" class="text-gray-400 hover:text-indigo-400 transition">Benefits</a></li>
-                            <li><a href="#pricing" class="text-gray-400 hover:text-indigo-400 transition">Pricing</a></li>
-                            <li><a href="#faq" class="text-gray-400 hover:text-indigo-400 transition">FAQ</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div>
-                        <h3 class="font-semibold mb-4">Support</h3>
-                        <ul class="space-y-2">
-                            <li><a href="#" class="text-gray-400 hover:text-indigo-400 transition">Help Center</a></li>
-                            <li><a href="#" class="text-gray-400 hover:text-indigo-400 transition">FAQs</a></li>
-                            <li><a href="#" class="text-gray-400 hover:text-indigo-400 transition">Contact Us</a></li>
-                            <li><a href="#" class="text-gray-400 hover:text-indigo-400 transition">Privacy Policy</a></li>
-                            <li><a href="#" class="text-gray-400 hover:text-indigo-400 transition">Terms of Service</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div>
-                        <h3 class="font-semibold mb-4">Newsletter</h3>
-                        <p class="text-gray-400 mb-4">
-                            Subscribe to our newsletter for weekly market insights and tips.
-                        </p>
-                        <form>
-                            <div class="flex">
-                                <input type="email" placeholder="Your email" class="w-full bg-gray-800 border border-indigo-900 rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                                <button class="btn-primary hover:bg-indigo-700 rounded-r-lg px-4 transition">
-                                    <i class="fas fa-paper-plane"></i>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                <div>
+                    <h4 class="footer-links-title">Support</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">Help Center</a></li>
+                        <li class="footer-link"><a href="#">Contact Us</a></li>
+                        <li class="footer-link"><a href="#">Privacy Policy</a></li>
+                        <li class="footer-link"><a href="#">Terms of Service</a></li>
+                    </ul>
                 </div>
                 
-                <div class="border-t border-gray-800 mt-8 pt-8">
-                    <!-- Regulatory Disclaimer -->
-                    <div class="bg-gray-800 bg-opacity-60 rounded-lg p-4 mb-8 border border-indigo-900 text-sm text-gray-400">
-                        <p class="flex items-start">
-                            <i class="fas fa-balance-scale text-indigo-400 mt-1 mr-2"></i>
-                            <span>
-                                <strong class="text-gray-300">Regulatory Notice:</strong> CryptoTrend Alpha provides algorithmic trading signals and does not offer financial advice or investment management services. We are not a registered investment advisor, broker-dealer, or financial institution. Cryptocurrency assets are currently not regulated in many jurisdictions. Regulations may vary by country - please ensure you comply with the laws and regulations applicable in your jurisdiction.
-                            </span>
-                        </p>
-                    </div>
-                    
-                    <div class="flex flex-col md:flex-row justify-between items-center">
-                        <p class="text-gray-400 text-sm mb-4 md:mb-0">
-                            &copy; 2025 CryptoTrend Alpha. All rights reserved.
-                        </p>
-                        <div class="flex space-x-6">
-                            <a href="#" class="text-gray-400 hover:text-indigo-400 text-sm transition">Privacy Policy</a>
-                            <a href="#" class="text-gray-400 hover:text-indigo-400 text-sm transition">Terms of Service</a>
-                            <a href="#" class="text-gray-400 hover:text-indigo-400 text-sm transition">Cookie Policy</a>
-                        </div>
-                    </div>
+                <div>
+                    <h4 class="footer-links-title">Newsletter</h4>
+                    <p class="footer-text">
+                        Subscribe for weekly market insights and tips.
+                    </p>
+                    <form class="footer-form">
+                        <input type="email" placeholder="Your email" class="footer-input">
+                        <button type="submit" class="footer-button">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
-        </footer>
-    </div>
-
-    <!-- Mobile View with Tab Navigation -->
-    <div class="desktop-hidden">
-        <!-- Mobile tabs -->
-        <div class="mobile-tabs">
-            <div class="tab-button active" data-tab="home">
-                <i class="fas fa-home"></i>
-                <span>Home</span>
+            
+            <!-- Regulatory Notice -->
+            <div class="notice">
+                <i class="fas fa-balance-scale notice-icon"></i>
+                <p class="notice-text mb-0">
+                    <span class="notice-title">Regulatory Notice:</span> CryptoTrend Alpha provides algorithmic trading signals and does not offer financial advice or investment management services. We are not a registered investment advisor, broker-dealer, or financial institution. Cryptocurrency assets are currently not regulated in many jurisdictions. Please ensure you comply with the laws and regulations applicable in your jurisdiction.
+                </p>
             </div>
-            <div class="tab-button" data-tab="how-it-works">
-                <i class="fas fa-info-circle"></i>
-                <span>How</span>
-            </div>
-            <div class="tab-button" data-tab="performance">
-                <i class="fas fa-chart-line"></i>
-                <span>Results</span>
-            </div>
-            <div class="tab-button" data-tab="pricing">
-                <i class="fas fa-tag"></i>
-                <span>Pricing</span>
-            </div>
-            <div class="tab-button" data-tab="signup">
-                <i class="fas fa-user-plus"></i>
-                <span>Join</span>
+            
+            <div class="footer-divider"></div>
+            
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    &copy; 2025 CryptoTrend Alpha. All rights reserved.
+                </p>
+                <div class="footer-legal">
+                    <a href="#" class="footer-legal-link">Privacy Policy</a>
+                    <a href="#" class="footer-legal-link">Terms of Service</a>
+                    <a href="#" class="footer-legal-link">Cookie Policy</a>
+                </div>
             </div>
         </div>
+    </footer>
+    
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <div class="mobile-nav-grid">
+            <a href="#" class="mobile-nav-link active">
+                <i class="fas fa-home mobile-nav-icon"></i>
+                <span>Home</span>
+            </a>
+            <a href="#how-it-works" class="mobile-nav-link">
+                <i class="fas fa-info-circle mobile-nav-icon"></i>
+                <span>How</span>
+            </a>
+            <a href="#performance" class="mobile-nav-link">
+                <i class="fas fa-chart-line mobile-nav-icon"></i>
+                <span>Results</span>
+            </a>
+            <a href="#pricing" class="mobile-nav-link">
+                <i class="fas fa-tag mobile-nav-icon"></i>
+                <span>Pricing</span>
+            </a>
+            <a href="#signup" class="mobile-nav-link">
+                <i class="fas fa-user-plus mobile-nav-icon"></i>
+                <span>Sign Up</span>
+            </a>
+        </div>
     </div>
-
+    
     <script>
+        // Mobile menu and navigation functionality
         document.addEventListener('DOMContentLoaded', function() {
-            // Mobile menu toggle functionality
-            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-            if (mobileMenuToggle) {
-                mobileMenuToggle.addEventListener('click', function() {
-                    // Add your mobile menu toggle logic here
-                    alert("Mobile menu clicked - implement your menu display logic");
-                });
-            }
+            const mobileToggle = document.querySelector('.mobile-menu-toggle');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
             
-            // Mobile tab navigation
-            const tabButtons = document.querySelectorAll('.tab-button');
-            
-            tabButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Remove active class from all buttons
-                    tabButtons.forEach(btn => btn.classList.remove('active'));
-                    
-                    // Add active class to clicked button
+            // Handle mobile navigation active states
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileNavLinks.forEach(item => item.classList.remove('active'));
                     this.classList.add('active');
-                    
-                    // Get tab id
-                    const tabId = this.getAttribute('data-tab');
-                    
-                    // Scroll to section with smooth behavior
-                    const section = document.getElementById(tabId);
-                    
-                    if (section) {
-                        window.scrollTo({
-                            top: section.offsetTop - 70,
-                            behavior: 'smooth'
-                        });
-                    }
                 });
             });
             
-            // Smooth scrolling for anchor links
+            // Smooth scrolling for all anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
-                    
                     const targetId = this.getAttribute('href');
                     
                     if (targetId === '#') return;
                     
                     const targetElement = document.querySelector(targetId);
-                    
                     if (targetElement) {
                         window.scrollTo({
-                            top: targetElement.offsetTop - 70,
+                            top: targetElement.offsetTop - 100,
                             behavior: 'smooth'
                         });
                     }
