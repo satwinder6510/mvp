@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>क्रिप्टोट्रेंड अल्फा | सिर्फ 5 मिनट में स्वचालित क्रिप्टो ट्रेडिंग</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Base Styles */
+        :root {
+            --cream: #f8f5f1;
+            --dark-green: #124947;
+            --light-green: #2ca793;
+            --accent-orange: #f3704b;
+            --text-dark: #1a2b2a;
+            --text-medium: #3c5655;
+            --text-light: #637776;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.07), 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        .serif-heading {
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--dark-green);
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--light-green);
+        }
+        
+        /* Layout */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .flex {
+            display: flex;
+        }
+        
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            font-size: 1.125rem;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent-orange);
+            color: white;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background-color: #e05a36;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--dark-green);
+            border: 2px solid var(--dark-green);
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(18, 73, 71, 0.05);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .btn-outline-white {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-outline-white:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        /* Card Styles */
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        /* Stat Card */
+        .stat-card {
+            padding: 2rem;
+            text-align: center;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--dark-green), var(--light-green));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-green);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        
+        /* Step Card */
+        .step-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -1.25rem;
+            left: 1.5rem;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            background-color: var(--accent-orange);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 10px rgba(243, 112, 75, 0.3);
+        }
+        
+        .step-icon {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            background-color: rgba(18, 73, 71, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-green);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Feature Card */
+        .feature-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .feature-icon-container {
+            height: 12rem;
+            background-color: rgba(18, 73, 71, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--light-green);
+        }
+        
+        .feature-content {
+            padding: 2rem;
+        }
+        
+        /* Navigation */
+        .header {
+            background-color: var(--cream);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-green);
+        }
+        
+        .logo span {
+            color: var(--light-green);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            color: var(--text-medium);
+            font-weight: 500;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--dark-green);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--dark-green);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero-text {
+            color: var(--text-medium);
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .hero-image-container {
+            position: relative;
+        }
+        
+        .equity-curve-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-badge {
+            position: absolute;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        
+        .badge-primary {
+            background-color: var(--dark-green);
+            color: white;
+            top: -1.5rem;
+            right: 2rem;
+        }
+        
+        .badge-secondary {
+            background-color: var(--accent-orange);
+            color: white;
+            bottom: -1rem;
+            left: 2rem;
+        }
+        
+        /* SVG Animation Styles */
+        .equity-line {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: draw-line 3s ease forwards;
+        }
+        
+        .area-fill {
+            opacity: 0;
+            animation: fade-in 2s ease forwards 1s;
+        }
+        
+        .profit-point {
+            opacity: 0;
+            animation: fade-in 0.5s ease forwards;
+        }
+        
+        .profit-point:nth-child(1) { animation-delay: 0.5s; }
+        .profit-point:nth-child(2) { animation-delay: 1s; }
+        .profit-point:nth-child(3) { animation-delay: 1.5s; }
+        .profit-point:nth-child(4) { animation-delay: 2s; }
+        .profit-point:nth-child(5) { animation-delay: 2.5s; }
+        .profit-point:nth-child(6) { animation-delay: 3s; }
+        
+        .profit-label {
+            opacity: 0;
+            animation: fade-in 0.5s ease forwards 3s;
+        }
+        
+        .chart-title {
+            opacity: 0;
+            animation: fade-in 1s ease forwards 0.5s;
+        }
+        
+        .grid-line {
+            stroke-dasharray: 5;
+            opacity: 0;
+            animation: fade-in 1s ease forwards, dash-animation 20s linear infinite;
+        }
+        
+        .grid-line:nth-child(1) { animation-delay: 0.2s; }
+        .grid-line:nth-child(2) { animation-delay: 0.4s; }
+        .grid-line:nth-child(3) { animation-delay: 0.6s; }
+        .grid-line:nth-child(4) { animation-delay: 0.8s; }
+        
+        @keyframes draw-line {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+        
+        @keyframes fade-in {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes dash-animation {
+            to {
+                stroke-dashoffset: 100;
+            }
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background-color: var(--dark-green);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .cta-title {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        .cta-text {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        /* Pricing Section */
+        .pricing-card-header {
+            text-align: center;
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #f1f1f1;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .pricing-box {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+        
+        .pricing-label {
+            color: var(--text-medium);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pricing-value {
+            color: var(--dark-green);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        
+        .pricing-detail {
+            color: var(--text-light);
+            font-size: 0.75rem;
+        }
+        
+        .included-list {
+            margin-bottom: 2rem;
+        }
+        
+        .included-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .included-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem 2rem;
+        }
+        
+        .included-item {
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .check-icon {
+            color: var(--light-green);
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+        }
+        
+        .pricing-footer {
+            text-align: center;
+        }
+        
+        .pricing-footer p {
+            color: var(--text-light);
+            font-size: 0.75rem;
+            margin-top: 0.75rem;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: white;
+            padding: 5rem 0 2rem;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-text {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .social-link {
+            color: var(--text-light);
+            font-size: 1.25rem;
+        }
+        
+        .social-link:hover {
+            color: var(--dark-green);
+        }
+        
+        .footer-links-title {
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-link {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-link a {
+            color: var(--text-light);
+        }
+        
+        .footer-link a:hover {
+            color: var(--dark-green);
+        }
+        
+        .footer-form {
+            display: flex;
+        }
+        
+        .footer-input {
+            flex: 1;
+            padding: 0.875rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem 0 0 0.5rem;
+            outline: none;
+        }
+        
+        .footer-input:focus {
+            border-color: var(--dark-green);
+        }
+        
+        .footer-button {
+            background-color: var(--dark-green);
+            color: white;
+            border: none;
+            border-radius: 0 0.5rem 0.5rem 0;
+            padding: 0 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-button:hover {
+            background-color: var(--light-green);
+        }
+        
+        .footer-divider {
+            border-top: 1px solid #e2e8f0;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .footer-copyright {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+        
+        .footer-legal {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .footer-legal-link {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+        
+        .footer-legal-link:hover {
+            color: var(--dark-green);
+        }
+        
+        .notice {
+            background-color: #f8f9fa;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+        
+        .notice-icon {
+            color: var(--dark-green);
+            font-size: 1.25rem;
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+        }
+        
+        .notice-text {
+            color: var(--text-medium);
+            font-size: 0.9375rem;
+            margin-bottom: 0;
+        }
+        
+        .notice-title {
+            color: var(--dark-green);
+            font-weight: 600;
+            display: inline;
+        }
+        
+        /* Mobile Navigation */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--dark-green);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            border-radius: 50px;
+            padding: 0.75rem 1.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            width: 90%;
+            max-width: 400px;
+        }
+        
+        .mobile-nav-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+        }
+        
+        .mobile-nav-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 0.5rem;
+            color: var(--text-light);
+            font-size: 0.75rem;
+            transition: all 0.2s ease;
+        }
+        
+        .mobile-nav-link.active {
+            color: var(--dark-green);
+        }
+        
+        .mobile-nav-icon {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+        
+        .mt-4 {
+            margin-top: 1rem;
+        }
+        
+        .mt-8 {
+            margin-top: 2rem;
+        }
+        
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+        
+        .mb-8 {
+            margin-bottom: 2rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.75rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            /* Layout */
+            .section {
+                padding: 3rem 0;
+            }
+            
+            /* Navigation */
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .mobile-nav {
+                display: block;
+            }
+            
+            /* Hero Section */
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 2.25rem;
+            }
+            
+            .hero-text {
+                font-size: 1.125rem;
+            }
+            
+            /* CTA Section */
+            .cta-title {
+                font-size: 2.25rem;
+            }
+            
+            .cta-text {
+                font-size: 1.125rem;
+            }
+            
+            /* Buttons */
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+            
+            /* Pricing Section */
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .included-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Footer */
+            .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .footer-legal {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container nav-container">
+            <div class="logo">
+                <span>क्रिप्टो</span>ट्रेंड अल्फा
+            </div>
+            
+            <nav class="nav-links">
+                <a href="#how-it-works" class="nav-link">यह कैसे काम करता है</a>
+                <a href="#performance" class="nav-link">प्रदर्शन</a>
+                <a href="#pricing" class="nav-link">मूल्य निर्धारण</a>
+                <a href="#faq" class="nav-link">अक्सर पूछे जाने वाले प्रश्न</a>
+            </nav>
+            
+            <a href="#signup" class="btn btn-primary">नि:शुल्क परीक्षण शुरू करें</a>
+            
+            <button class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Hero Section with Animated Equity Curve -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div>
+                    <h1 class="hero-title serif-heading">
+                        रोजाना <span style="color: var(--dark-green);">सिर्फ 5 मिनट</span> में स्वचालित क्रिप्टो ट्रेडिंग
+                    </h1>
+                    <p class="hero-text">
+                        हमारा मालिकाना एल्गोरिदम 40% वार्षिक रिटर्न देता है और साथ ही आपके घंटों स्क्रीन टाइम और भावनात्मक तनाव को बचाता है।
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#signup" class="btn btn-primary">
+                            अपना 14-दिन का परीक्षण शुरू करें
+                        </a>
+                        <a href="#how-it-works" class="btn btn-secondary">
+                            यह कैसे काम करता है
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="hero-image-container">
+                    <div class="hero-badge badge-primary">रोज़ाना सिर्फ 5 मिनट</div>
+                    <div class="hero-badge badge-secondary">40% वार्षिक रिटर्न</div>
+                    
+                    <div class="equity-curve-container">
+                        <!-- Animated Equity Curve SVG -->
+                        <svg width="100%" height="350" viewBox="0 0 600 350" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Title and Labels -->
+                            <text x="300" y="30" text-anchor="middle" class="chart-title" font-family="Poppins" font-size="16" font-weight="600" fill="#1a2b2a">पोर्टफोलियो वृद्धि (40% वार्षिक रिटर्न)</text>
+                            
+                            <!-- Grid Lines -->
+                            <line x1="50" y1="50" x2="550" y2="50" stroke="#e2e8f0" stroke-width="1" class="grid-line" />
+                            <line x1="50" y1="125" x2="550" y2="125" stroke="#e2e8f0" stroke-width="1" class="grid-line" />
+                            <line x1="50" y1="200" x2="550" y2="200" stroke="#e2e8f0" stroke-width="1" class="grid-line" />
+                            <line x1="50" y1="275" x2="550" y2="275" stroke="#e2e8f0" stroke-width="1" class="grid-line" />
+                            
+                            <!-- Y-axis labels -->
+                            <text x="45" y="50" text-anchor="end" font-family="Poppins" font-size="12" fill="#637776">₹4,00,000</text>
+                            <text x="45" y="125" text-anchor="end" font-family="Poppins" font-size="12" fill="#637776">₹3,00,000</text>
+                            <text x="45" y="200" text-anchor="end" font-family="Poppins" font-size="12" fill="#637776">₹2,00,000</text>
+                            <text x="45" y="275" text-anchor="end" font-family="Poppins" font-size="12" fill="#637776">₹1,00,000</text>
+                            
+                            <!-- X-axis labels (Months) -->
+                            <text x="80" y="295" text-anchor="middle" font-family="Poppins" font-size="12" fill="#637776">जन</text>
+                            <text x="175" y="295" text-anchor="middle" font-family="Poppins" font-size="12" fill="#637776">मार्च</text>
+                            <text x="270" y="295" text-anchor="middle" font-family="Poppins" font-size="12" fill="#637776">मई</text>
+                            <text x="365" y="295" text-anchor="middle" font-family="Poppins" font-size="12" fill="#637776">जुल</text>
+                            <text x="460" y="295" text-anchor="middle" font-family="Poppins" font-size="12" fill="#637776">सित</text>
+                            <text x="555" y="295" text-anchor="middle" font-family="Poppins" font-size="12" fill="#637776">नव</text>
+                            
+                            <!-- Equity Curve Line and Area -->
+                            <path d="M80,275 C90,270 120,240 175,230 C230,220 250,225 270,215 C290,205 320,195 365,180 C410,165 430,135 460,130 C490,125 520,90 555,70" 
+                                  fill="none" 
+                                  stroke="#2ca793" 
+                                  stroke-width="3"
+                                  class="equity-line" />
+                            
+                            <path d="M80,275 C90,270 120,240 175,230 C230,220 250,225 270,215 C290,205 320,195 365,180 C410,165 430,135 460,130 C490,125 520,90 555,70 L555,275 L80,275 Z" 
+                                  fill="url(#gradient)" 
+                                  fill-opacity="0.2" 
+                                  class="area-fill" />
+                            
+                            <!-- Gradient for the area fill -->
+                            <defs>
+                                <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" stop-color="#2ca793" stop-opacity="0.6" />
+                                    <stop offset="100%" stop-color="#2ca793" stop-opacity="0.1" />
+                                </linearGradient>
+                            </defs>
+                            
+                            <!-- Data Points -->
+                            <circle cx="80" cy="275" r="6" fill="#2ca793" class="profit-point" />
+                            <circle cx="175" cy="230" r="6" fill="#2ca793" class="profit-point" />
+                            <circle cx="270" cy="215" r="6" fill="#2ca793" class="profit-point" />
+                            <circle cx="365" cy="180" r="6" fill="#2ca793" class="profit-point" />
+                            <circle cx="460" cy="130" r="6" fill="#2ca793" class="profit-point" />
+                            <circle cx="555" cy="70" r="6" fill="#2ca793" class="profit-point" />
+                            
+                            <!-- Final Return Label -->
+                            <rect x="500" y="45" width="60" height="30" rx="5" fill="#124947" class="profit-label" />
+                            <text x="530" y="65" text-anchor="middle" font-family="Poppins" font-size="12" font-weight="600" fill="white" class="profit-label">+40%</text>
+                            
+                            <!-- Initial Investment Label -->
+                            <rect x="50" y="275" width="60" height="30" rx="5" fill="#f3704b" class="profit-label" />
+                            <text x="80" y="295" text-anchor="middle" font-family="Poppins" font-size="12" font-weight="600" fill="white" class="profit-label">शुरू</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">5 मिनट</div>
+                    <div class="stat-label">प्रतिदिन आवश्यक समय</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">40%</div>
+                    <div class="stat-label">वार्षिक रिटर्न</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">74%</div>
+                    <div class="stat-label">जीत दर</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">12%</div>
+                    <div class="stat-label">अधिकतम गिरावट</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="serif-heading text-4xl">यह कैसे काम करता है</h2>
+                <p class="text-center text-lg text-text-medium mt-4 max-w-3xl mx-auto">
+                    एक सरल, तीन-चरण वाली प्रक्रिया जो आपके दिन के सिर्फ 5 मिनट लेती है
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold">दैनिक संकेत प्राप्त करें</h3>
+                    <p class="text-text-medium">
+                        हर सुबह, हमारे मालिकाना एल्गोरिदम से स्पष्ट ट्रेडिंग संकेत प्राप्त करें जो कई समय-अवधि में बाजार के रुझानों का विश्लेषण करता है।
+                    </p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold">समीक्षा और अनुमोदन</h3>
+                    <p class="text-text-medium">
+                        बस अपने डैशबोर्ड में अनुशंसित ट्रेडों की समीक्षा करें - आपके पोर्टफोलियो में प्रत्येक संपत्ति के लिए स्पष्ट खरीद, बिक्री या होल्ड सिग्नल।
+                    </p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold">निष्पादित करें और आराम करें</h3>
+                    <p class="text-text-medium">
+                        एक क्लिक से ट्रेडों को निष्पादित करें और अपने दिन की शुरुआत करें। हमारा एल्गोरिदम लगातार बाजार पर नज़र रखता है ताकि आपको ऐसा न करना पड़े।
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center">
+                <div class="card inline-block mx-auto py-6 px-10">
+                    <h3 class="text-xl font-bold mb-2">कुल ट्रेडिंग समय: <span style="color: var(--dark-green);">5 मिनट</span></h3>
+                    <p class="text-text-medium mb-0">आपके दिन का बाकी समय आपका है</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Benefits Section -->
+    <section class="section bg-white">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="serif-heading text-4xl">आप अब क्या नहीं कर रहे हैं</h2>
+                <p class="text-center text-lg text-text-medium mt-4 max-w-3xl mx-auto">
+                    जो मायने रखता है उस पर ध्यान दें, बाकी सब स्वचालित करें
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-tv feature-icon"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3 class="text-xl font-semibold mb-3">अब और अंतहीन स्क्रीन टाइम नहीं</h3>
+                        <p class="text-text-medium mb-0">
+                            चार्ट्स पर 8+ घंटे घूरने और लगातार मूल्य आंदोलनों की जांच करने से छुटकारा पाएं।
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-brain feature-icon"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3 class="text-xl font-semibold mb-3">अब और भावनात्मक ट्रेडिंग नहीं</h3>
+                        <p class="text-text-medium mb-0">
+                            एल्गोरिदम-संचालित सिग्नल के साथ अपने ट्रेडिंग निर्णयों से भय और लालच को खत्म करें।
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-chart-line feature-icon"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3 class="text-xl font-semibold mb-3">अब और विश्लेषण पक्षाघात नहीं</h3>
+                        <p class="text-text-medium mb-0">
+                            परस्पर विरोधी संकेतकों और जटिल चार्ट पैटर्न की भ्रम से छुटकारा पाएं।
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Performance Section -->
+    <section id="performance" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="serif-heading text-4xl">सत्यापित प्रदर्शन</h2>
+                <p class="text-center text-lg text-text-medium mt-4 max-w-3xl mx-auto">
+                    हमारे एल्गोरिदम को लगातार परिणामों के साथ कई बाजार चक्रों में बैकटेस्ट किया गया है।
+                </p>
+            </div>
+            
+            <div class="card mb-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-semibold mb-0">प्रदर्शन इतिहास</h3>
+                    <div class="flex gap-1">
+                        <button class="px-4 py-2 rounded-md text-sm border border-gray-200 text-text-medium hover:bg-gray-50">1M</button>
+                        <button class="px-4 py-2 rounded-md text-sm border border-gray-200 text-text-medium hover:bg-gray-50">3M</button>
+                        <button class="px-4 py-2 rounded-md text-sm bg-dark-green text-white">1Y</button>
+                        <button class="px-4 py-2 rounded-md text-sm border border-gray-200 text-text-medium hover:bg-gray-50">All</button>
+                    </div>
+                </div>
+                <img src="/api/placeholder/900/400" alt="40% वार्षिक रिटर्न दिखाने वाला प्रदर्शन चार्ट" class="w-full rounded-lg">
+                <p class="text-xs text-text-light italic mt-4 mb-0">
+                    पिछला प्रदर्शन भविष्य के परिणामों का संकेतक नहीं है। चार्ट बैकटेस्टेड प्रदर्शन दिखाता है।
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="card text-center">
+                    <div class="text-sm font-medium text-text-medium mb-1">सर्वश्रेष्ठ महीना</div>
+                    <div class="text-3xl font-bold text-accent-orange mb-1">+14.0%</div>
+                    <div class="text-sm text-text-light mb-0">फरवरी 2024</div>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="text-sm font-medium text-text-medium mb-1">औसत मासिक</div>
+                    <div class="text-3xl font-bold text-dark-green mb-1">+3.3%</div>
+                    <div class="text-sm text-text-light mb-0">सभी बाजार परिस्थितियों में</div>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="text-sm font-medium text-text-medium mb-1">रिकवरी समय</div>
+                    <div class="text-3xl font-bold text-light-green mb-1">2.4 महीने</div>
+                    <div class="text-sm text-text-light mb-0">नए इक्विटी उच्च तक का औसत समय</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section id="pricing" class="section bg-white">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="serif-heading text-4xl">प्रदर्शन-आधारित मूल्य निर्धारण</h2>
+                <p class="text-center text-lg text-text-medium mt-4 max-w-3xl mx-auto">
+                    हम तभी सफल होते हैं जब आप सफल होते हैं
+                </p>
+            </div>
+            
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="card">
+                    <div class="pricing-card-header">
+                        <h3 style="font-size: 1.75rem;">सभी के लिए एक सरल योजना</h3>
+                        <p style="color: var(--text-medium);">सभी स्तरों के ट्रेडर्स के लिए समान शानदार सुविधाएँ</p>
+                    </div>
+                    
+                    <div class="pricing-grid">
+                        <div class="pricing-box">
+                            <div class="pricing-label">मासिक सदस्यता</div>
+                            <div class="pricing-value">₹1,500</div>
+                            <div class="pricing-detail">मासिक बिल किया जाता है</div>
+                        </div>
+                        
+                        <div class="pricing-box">
+                            <div class="pricing-label">प्रदर्शन शुल्क</div>
+                            <div class="pricing-value">20%</div>
+                            <div class="pricing-detail">केवल नए लाभों पर</div>
+                        </div>
+                    </div>
+                    
+                    <div class="included-list">
+                        <h4 class="included-title">शामिल सुविधाएँ:</h4>
+                        <div class="included-grid">
+                            <div class="included-item">
+                                <i class="fas fa-check check-icon"></i>
+                                <span>सभी प्रमुख क्रिप्टो पेयर्स</span>
+                            </div>
+                            <div class="included-item">
+                                <i class="fas fa-check check-icon"></i>
+                                <span>दैनिक ट्रेड सिग्नल</span>
+                            </div>
+                            <div class="included-item">
+                                <i class="fas fa-check check-icon"></i>
+                                <span>स्वचालित निष्पादन</span>
+                            </div>
+                            <div class="included-item">
+                                <i class="fas fa-check check-icon"></i>
+                                <span>जोखिम प्रबंधन उपकरण</span>
+                            </div>
+                            <div class="included-item">
+                                <i class="fas fa-check check-icon"></i>
+                                <span>प्रदर्शन डैशबोर्ड</span>
+                            </div>
+                            <div class="included-item">
+                                <i class="fas fa-check check-icon"></i>
+                                <span>मोबाइल सूचनाएँ</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="notice mb-6">
+                        <i class="fas fa-info-circle notice-icon"></i>
+                        <p class="notice-text mb-0">
+                            <span class="notice-title">हाई वॉटरमार्क नीति:</span> प्रदर्शन शुल्क केवल उन लाभों पर लगाया जाता है जो आपके पोर्टफोलियो के पिछले उच्चतम मूल्य से अधिक होते हैं। यह सुनिश्चित करता है कि आप एक ही लाभ पर कभी भी दो बार शुल्क नहीं देते हैं।
+                        </p>
+                    </div>
+                    
+                    <div class="pricing-footer">
+                        <a href="#signup" class="btn btn-primary">
+                            अपना 14-दिन का परीक्षण शुरू करें
+                        </a>
+                        <p>
+                            अनुशंसित प्रारंभिक राशि: ₹2,00,000
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section id="faq" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="serif-heading text-4xl">अक्सर पूछे जाने वाले प्रश्न</h2>
+                <p class="text-center text-lg text-text-medium mt-4 max-w-3xl mx-auto">
+                    शुरू करने से पहले आपको जानने के लिए आवश्यक सब कुछ
+                </p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto space-y-4">
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3">मुझे प्रतिदिन कितना समय बिताना होगा?</h3>
+                    <p class="text-text-medium mb-0">
+                        हर दिन सिर्फ 5 मिनट। हमारा एल्गोरिदम सारी भारी लिफ्टिंग करता है, बाजार रुझानों का विश्लेषण करता है और स्पष्ट संकेत उत्पन्न करता है। आप बस लॉग इन करें, अनुशंसित ट्रेडों की समीक्षा करें और उन्हें एक क्लिक से निष्पादित करें।
+                    </p>
+                </div>
+                
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3">कौन से एक्सचेंज समर्थित हैं?</h3>
+                    <p class="text-text-medium mb-0">
+                        हम वर्तमान में बिनेंस, वाज़ीरएक्स, कॉइनडीसीएक्स और ज़ेबपे का समर्थन करते हैं। हम उपयोगकर्ता की मांग के आधार पर और अधिक एक्सचेंज जोड़ने के लिए लगातार काम कर रहे हैं।
+                    </p>
+                </div>
+                
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3">शुरू करने के लिए मुझे कितनी पूंजी की आवश्यकता है?</h3>
+                    <p class="text-text-medium mb-0">
+                        हम इष्टतम परिणाम प्राप्त करने के लिए कम से कम ₹2,00,000 से शुरू करने की सलाह देते हैं, लेकिन आप ₹50,000 से भी शुरुआत कर सकते हैं। एल्गोरिदम बड़ी पूंजी राशि के साथ प्रभावी ढंग से स्केल करता है।
+                    </p>
+                </div>
+                
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3">आपका प्रदर्शन शुल्क कैसे काम करता है?</h3>
+                    <p class="text-text-medium mb-0">
+                        हम केवल उन लाभों पर 20% प्रदर्शन शुल्क चार्ज करते हैं जो आपके पोर्टफोलियो के पिछले उच्चतम मूल्य (हाई वॉटरमार्क) से अधिक होते हैं। यह सुनिश्चित करता है कि आप केवल नए लाभों के लिए भुगतान करते हैं और यदि आपका पोर्टफोलियो उतार-चढ़ाव करता है तो आप कभी भी एक ही लाभ पर दो बार शुल्क नहीं देते हैं।
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title serif-heading">रोज़ाना 5 मिनट में ट्रेडिंग शुरू करें</h2>
+            <p class="cta-text">
+                हजारों भारतीय ट्रेडर्स से जुड़ें जो अपना समय पुनः प्राप्त कर रहे हैं और लगातार रिटर्न प्राप्त कर रहे हैं।
+            </p>
+            <div class="cta-buttons">
+                <a href="#signup" class="btn btn-primary">14-दिन का परीक्षण शुरू करें</a>
+                <a href="#how-it-works" class="btn btn-outline-white">यह कैसे काम करता है</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3 class="footer-title">
+                        <span style="color: var(--light-green);">क्रिप्टो</span>ट्रेंड अल्फा
+                    </h3>
+                    <p class="footer-text">
+                        अस्थिर बाजारों में लगातार रिटर्न के साथ प्रतिदिन सिर्फ 5 मिनट में स्वचालित क्रिप्टो ट्रेडिंग।
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="footer-links-title">त्वरित लिंक</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#how-it-works">यह कैसे काम करता है</a></li>
+                        <li class="footer-link"><a href="#performance">प्रदर्शन</a></li>
+                        <li class="footer-link"><a href="#benefits">लाभ</a></li>
+                        <li class="footer-link"><a href="#pricing">मूल्य निर्धारण</a></li>
+                        <li class="footer-link"><a href="#faq">अक्सर पूछे जाने वाले प्रश्न</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-links-title">सहायता</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">सहायता केंद्र</a></li>
+                        <li class="footer-link"><a href="#">हमसे संपर्क करें</a></li>
+                        <li class="footer-link"><a href="#">गोपनीयता नीति</a></li>
+                        <li class="footer-link"><a href="#">सेवा की शर्तें</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-links-title">न्यूज़लेटर</h4>
+                    <p class="footer-text">
+                        साप्ताहिक बाजार अंतर्दृष्टि और युक्तियों के लिए हमारे न्यूज़लेटर की सदस्यता लें।
+                    </p>
+                    <form class="footer-form">
+                        <input type="email" placeholder="आपका ईमेल" class="footer-input">
+                        <button type="submit" class="footer-button">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Regulatory Notice -->
+            <div class="notice">
+                <i class="fas fa-balance-scale notice-icon"></i>
+                <p class="notice-text mb-0">
+                    <span class="notice-title">नियामक नोटिस:</span> क्रिप्टोट्रेंड अल्फा एल्गोरिथमिक ट्रेडिंग सिग्नल प्रदान करता है और वित्तीय सलाह या निवेश प्रबंधन सेवाएं प्रदान नहीं करता है। हम एक पंजीकृत निवेश सलाहकार, ब्रोकर-डीलर, या वित्तीय संस्थान नहीं हैं। क्रिप्टोकरेंसी संपत्तियां वर्तमान में कई क्षेत्राधिकारों में विनियमित नहीं हैं। कृपया सुनिश्चित करें कि आप अपने क्षेत्राधिकार में लागू कानूनों और विनियमों का पालन करते हैं।
+                </p>
