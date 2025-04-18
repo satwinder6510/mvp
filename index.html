@@ -44,7 +44,6 @@
             color: var(--text-dark);
             line-height: 1.6;
             overflow-x: hidden; /* Prevent horizontal scrolling */
-            width: 100%;
         }
         
         /* Typography */
@@ -920,18 +919,9 @@
                 gap: 1rem;
             }
             
-            /* Prevent any wobbling caused by horizontal scrolling
-           while ensuring vertical scrolling works properly */
-            html, body {
+            /* Simple fix for horizontal wobble */
+            html {
                 overflow-x: hidden;
-                width: 100%;
-                height: auto; /* Allow proper vertical scrolling */
-                position: relative; /* Create proper stacking context */
-            }
-            
-            /* Add a special class for the iOS repaint fix */
-            .force-repaint {
-                transform: translateZ(0);
             }
         }
         
@@ -1134,26 +1124,6 @@
                     }
                 });
             });
-
-            // Simple touch detection to identify the device type
-            const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-            
-            // Only add iOS-specific fixes if it appears to be a touch device
-            if (isTouchDevice) {
-                // Add a tiny safe scroll throttle to prevent rendering issues
-                let lastScrollTime = 0;
-                window.addEventListener('scroll', function() {
-                    const now = Date.now();
-                    if (now - lastScrollTime > 200) { // Only run every 200ms at most
-                        lastScrollTime = now;
-                        // A gentle approach to force repaints without breaking scrolling
-                        document.body.classList.add('force-repaint');
-                        setTimeout(() => {
-                            document.body.classList.remove('force-repaint');
-                        }, 10);
-                    }
-                }, { passive: true });
-            }
         });
     </script>
 </body>
